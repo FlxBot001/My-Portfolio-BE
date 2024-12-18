@@ -7,7 +7,7 @@ function ParentComponent(props) {
 
     return (
         <div>
-            <Header />
+            <Header handle />
             <Aside />
         </div>
     );
