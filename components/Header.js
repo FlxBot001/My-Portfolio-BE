@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FcLeftDown, FcMenu, FcRightUp } from "react-icons/fc";
 
 
-export default function Header() {
+export default function Header({ handleAsideOpen }) {
 
     const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -22,7 +22,7 @@ export default function Header() {
         <header className="header flex flex-sb">
             <div className="logo flex gap-2">
                 <h1>ADMIN</h1>
-                <div className="headerham flex flex-center">
+                <div className="headerham flex flex-center" onClick={handleAsideOpen}>
                     <FcMenu />
                 </div>
             </div>
