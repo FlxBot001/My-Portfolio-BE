@@ -1,12 +1,12 @@
 
 import "@/styles/globals.css";
-import Header from "@/components/Header";
+import ParentComponent from "@/components/ParentComponent";
 
 export default function App({ Component, pageProps }) {
 
 
   return <>
-    <Header />
+    <ParentComponent />
     <Component {...pageProps} />
   </>
 }
