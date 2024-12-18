@@ -1,12 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { BsPostcard } from "react-icons/bs";
-import { IoHome, IoSettingsOutline } from "react-icons/io5";
-import { MdOutlineWorkOutline } from "react-icons/md";
-import { RiShoppingCartLine } from "react-icons/ri";
-import { GrGallery } from "react-icons/gr";
-import { TiContacts } from "react-icons/ti";
+import { FcBriefcase, FcGallery, FcDepartment, FcRules, FcServices, FcInTransit, FcAddressBook } from "react-icons/fc";
 
 
 export default function Aside() {
@@ -35,13 +30,13 @@ export default function Aside() {
                         <ul>
                                 <Link href='/'>
                                         <li className="navactive">
-                                                <IoHome />
+                                                <FcDepartment  />
                                                 <span>Dashboard</span>
                                         </li>
                                 </Link>
                                 <li className={activeLink === '/blogs' ? 'navactive flex-col flex-left' : 'flex-col flex-left'} onClick={() => handleLinkClick('/blogs')}>
                                         <div className="flex gap-1">
-                                                <BsPostcard />
+                                                <FcRules />
                                                 <span>Blogs</span>
                                         </div>
                                         {activeLink === '/blogs' && (
@@ -56,7 +51,7 @@ export default function Aside() {
 
                                 <li className={activeLink === '/projects' ? 'navactive flex-col flex-left' : 'flex-col flex-left'} onClick={() => handleLinkClick('/projects')}>
                                         <div className="flex gap-1">
-                                                <MdOutlineWorkOutline />
+                                                <FcBriefcase />
                                                 <span>Projects</span>
                                         </div>
                                         {activeLink === '/projects' && (
@@ -70,7 +65,7 @@ export default function Aside() {
 
                                 <li className={activeLink === '/shops' ? 'navactive flex-col flex-left' : 'flex-col flex-left'} onClick={() => handleLinkClick('/shops')}>
                                         <div className="flex gap-1">
-                                                <RiShoppingCartLine />
+                                                <FcInTransit />
                                                 <span>Shops</span>
                                         </div>
                                         {activeLink === '/shops' && (
@@ -84,7 +79,7 @@ export default function Aside() {
 
                                 <li className={activeLink === '/gallery' ? 'navactive flex-col flex-left' : 'flex-col flex-left'} onClick={() => handleLinkClick('/gallery')}>
                                         <div className="flex gap-1">
-                                                <GrGallery />
+                                                <FcGallery />
                                                 <span>Gallery</span>
                                         </div>
                                         {activeLink === '/gallery' && (
@@ -97,14 +92,14 @@ export default function Aside() {
 
                                 <Link href='/contacts'>
                                         <li className={activeLink === '/contacts' ? 'navactive' : ''} onClick={() => handleLinkClick('/contacts')}>
-                                                <TiContacts />
+                                                <FcAddressBook />
                                                 <span>Contacts</span>
                                         </li>
                                 </Link>
 
                                 <Link href='/setting'>
                                         <li className={activeLink === '/setting' ? 'navactive' : ''} onClick={() => handleLinkClick('/setting')}>
-                                                <IoSettingsOutline />
+                                                <FcServices />
                                                 <span>Settings</span>
                                         </li>
                                 </Link>
