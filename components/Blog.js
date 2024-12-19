@@ -2,10 +2,11 @@
 import ReactMarkdown from 'react-markdown';
 import MarkdownEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
+import Spinner from './Spinner';
 
 export default function Blog() {
     
-
+    
 
     return <>
         <form className="addWebsiteform">
@@ -19,6 +20,45 @@ export default function Blog() {
             <div className="w-100 flex flex-col flex-left mb-2">
                 <label htmlFor="title">Slug (SEO friendly URL)</label>
                 <input type="text" id='slug' placeholder='Enter Slug URL' />
+            </div>
+
+            {/* blog category */}
+            <div className="w-100 flex flex-col flex-left mb-2">
+                <label htmlFor="category"> Select Category</label>
+                <select name="category" id="category" multiple>
+                    <option value="React Js"> React Js</option>
+                    <option value="Three Js"> Three Js</option>
+                    <option value="Next Js"> Next Js</option>
+                    <option value="Django"> Django</option>
+                    <option value="Artificial Intellijence"> Artificial Intellijence</option>
+                    <option value="AWS Cloud"> AWS Cloud</option>
+                    <option value="Azure Cloud"> Azure Cloud</option>
+                    <option value="GCP Cloud"> GCP Cloud</option>
+                    <option value="JWT Tokens"> JWT Tokens</option>
+                    <option value="Cyber Security"> Cyber Security</option>
+                    <option value="DevSecOps"> DevSecOps</option>
+                    <option value="DevOps"> DevOps</option>
+                </select>
+            </div>
+
+            {/* blog image */}
+            <div className="w-100 flex flex-col flex-left mb-2">
+                <div className="w-100">
+                    <label htmlFor="images"> Images (1st image will show as a thumbnail, drag supported)</label>
+                    <input type="file" id='fileInput' className="mt-1" accept='image/*' multiple />
+                </div>
+                <div className="w-100 flex flex-left mt-1">
+                    <Spinner />
+                </div>
+            </div>
+
+            {/* image preview and Image sortable*/}
+            {/* pending */}
+
+            {/* markdown description */}
+            <div className="description w-100 flex flex-col flex-left mb-2">
+                <label htmlFor="description">Blog Content (for image: 1st upload and copy link, paste in ![alt text](link))</label>
+                
             </div>
         </form>
     </>
