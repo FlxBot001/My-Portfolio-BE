@@ -14,7 +14,7 @@ export default function Addblog() {
                     <h3>ADMIN PANEL</h3>
                 </div>
                 <div className="breadcrumb">
-                    <FcSurvey /> <span>/</span> <span>Addblog</span>
+                    <FcSurvey /> <span>/</span> <span>Add Blog</span>
                 </div>
             </div>
             <div className="blogsadd">
