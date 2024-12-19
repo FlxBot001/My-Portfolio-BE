@@ -2,13 +2,17 @@ import ReactMarkdown from "react-markdown";
 import MarkdownEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
 import Spinner from "./Spinner";
-import { text } from "@cloudinary/url-gen/qualifiers/source";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-export default function Blog() {
+
+export default function Blog(
+    {
+        _id
+    }
+) {
 
     const [redirect, setRedirect] = useState(false);
     const router = useRouter();
@@ -150,7 +154,7 @@ export default function Blog() {
 
                         onChange={(ev) => setdescription(ev.text)}
 
-                        style={{ width: "98%", height: "650px" }}
+                        style={{ width: "98%", height: "800px" }}
 
                         renderHTML={(text) => (
                             <ReactMarkdown components={{
@@ -168,7 +172,7 @@ export default function Blog() {
                                                     <code>{children}</code>
                                                 </pre>
                                                 <button style={{ position: 'absolute', top: '0', right: '0', zIndex: '1' }} onClick={() => navigator.clipboard.writeText(children)}>
-                                                    copy code
+                                                    copy
                                                 </button>
                                             </div>
                                         )
@@ -212,7 +216,12 @@ export default function Blog() {
                 {/* blog status */}
                 <div className="w-100 flex flex-col flex-left mb-2">
                     <label htmlFor="status">Status</label>
-                    <select name="status" id="status">
+                    <select
+                        name="status"
+                        id="status"
+                        value={status}
+                        onChange={ev => setstatus(ev.target.value)}
+                    >
                         <option value="">Select Option</option>
                         <option value="draft">Draft</option>
                         <option value="publish">Publish</option>
