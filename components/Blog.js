@@ -32,6 +32,10 @@ export default function Blog(
     async function createBlog(ev) {
         ev.preventDefault();
 
+        if (isUploading) {
+            await Promise.all(uploadImageQueue)
+        }
+
         const data = {
             title,
             slug,
@@ -52,6 +56,25 @@ export default function Blog(
 
         setRedirect(true);
     };
+
+    async function uploadImages(ev) {
+        const files = ev.target?.files;
+        if (files?.length > 0) {
+            setIsUploading(true);
+
+            for(const file of files) {
+                const data = new FormData();
+                data.append('file', file);
+
+                // use the axios.post method and push the promise to the queue
+                uploadImageQueue.push(
+                    axios.post('/api/upload', data).then(res => {
+                        setimages(oldImages => [...oldImages, ...res.data.links])
+                    })
+                )
+            }
+        }
+    }
 
     if (redirect) {
         router.push('/blogs')
