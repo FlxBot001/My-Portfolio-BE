@@ -94,9 +94,10 @@ export default function Blog() {
                                                 <button style={{position: 'absolute', top: '0', right: '0', zIndex: '1'}} onClick={() => navigator.clipboard.writeText(children)}>
                                                     copy code
                                                 </button>
-
                                             </div>
                                         )
+                                    } else {
+                                        return <code {...props}>{children}</code>
                                     }
                                 }
                             }}>
@@ -104,6 +105,37 @@ export default function Blog() {
                             </ReactMarkdown>
                         )}
                     />
+                </div>
+
+                {/* tags */}
+                <div className="w-100 flex flex-col flex-left mb-2">
+                    <label htmlFor="tags">Tags</label>
+                    <select name="tags" id="tags" multiple>
+                        <option value="html">html</option>
+                        <option value="css">css</option>
+                        <option value="javascript">javascript</option>
+                        <option value="nextjs">nextjs</option>
+                        <option value="threejs">threejs</option>
+                        <option value="nodejs">nodejs</option>
+                        <option value="java">java</option>
+                        <option value="django">django</option>
+                        <option value="dotnet">dotnet</option>
+                    </select>
+                </div>
+
+                {/* blog status */}
+                <div className="w-100 flex flex-col flex-left mb-2">
+                    <label htmlFor="status">Status</label>
+                    <select name="status" id="status">
+                        <option value="">Select Option</option>
+                        <option value="draft">Draft</option>
+                        <option value="publish">Publish</option>
+                    </select>
+                </div>
+
+                {/* submit Button */}
+                <div className="w-100 mb-3">
+                    <button type="submit" className="w-100 addwebbtn flex-center">SAVE BLOG</button>
                 </div>
             </form>
         </>
