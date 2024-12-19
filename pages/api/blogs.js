@@ -11,9 +11,22 @@ export default async function handle(req, res) {
     const { method } = req;
 
     if (method === 'POST') {
-        const { title, slug, images, description, blogcategory, tags, status } = req.body;
+        const { title, 
+                slug, 
+                images, 
+                description, 
+                blogcategory, 
+                tags, 
+                status 
+            } = req.body;
         const blogDoc = await Blog.create({
-            title, slug, images, description, blogcategory, tags, status
+            title, 
+            slug, 
+            images, 
+            description, 
+            blogcategory, 
+            tags, 
+            status
         })
 
         res.json(blogDoc)
@@ -28,6 +41,31 @@ export default async function handle(req, res) {
     }
 
     if (method === 'PUT') {
+        const { 
+            _id, 
+            title, 
+            slug, 
+            images, 
+            description, 
+            blogcategory, 
+            tags, 
+            status 
+        } = req.body;
+
+        await Blog.updateOne({_id}, {
+            title, 
+            slug, 
+            images, 
+            description, 
+            blogcategory, 
+            tags, 
+            status
+        });
+
+        res.json(true)
+    }
+
+    if (method === 'DELETE') {
         
     }
 
