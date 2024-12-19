@@ -96,9 +96,9 @@ export default function Blog(
     }
 
     function handleDeleteImage(index) {
-        const updateImages = [...images];
+        const uploadImages = [...images];
         uploadImages.splice(index, 1);
-        setimages(updateImages);
+        setimages(uploadImages);
         toast.success('Images Deleated Successfully')
     }
 
