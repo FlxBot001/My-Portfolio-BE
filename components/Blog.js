@@ -103,10 +103,7 @@ export default function Blog() {
                         <option value="Three Js"> Three Js</option>
                         <option value="Next Js"> Next Js</option>
                         <option value="Django"> Django</option>
-                        <option value="Artificial Intellijence">
-                            {" "}
-                            Artificial Intellijence
-                        </option>
+                        <option value="AI">AI</option>
                         <option value="AWS Cloud"> AWS Cloud</option>
                         <option value="Azure Cloud"> Azure Cloud</option>
                         <option value="GCP Cloud"> GCP Cloud</option>
@@ -149,6 +146,10 @@ export default function Blog() {
 
                     <MarkdownEditor
 
+                        value={description}
+
+                        onChange={(ev) => setdescription(ev.text)}
+
                         style={{ width: "98%", height: "650px" }}
 
                         renderHTML={(text) => (
@@ -185,7 +186,17 @@ export default function Blog() {
                 {/* tags */}
                 <div className="w-100 flex flex-col flex-left mb-2">
                     <label htmlFor="tags">Tags</label>
-                    <select name="tags" id="tags" multiple>
+                    <select
+                        name="tags"
+                        id="tags"
+                        multiple
+                        value={tags}
+                        onChange={(e) => settags(
+                            Array.from(
+                                e.target.selectedOptions, option => option.value
+                            )
+                        )}
+                    >
                         <option value="html">html</option>
                         <option value="css">css</option>
                         <option value="javascript">javascript</option>
