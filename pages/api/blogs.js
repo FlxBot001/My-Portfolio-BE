@@ -11,32 +11,21 @@ export default async function handle(req, res) {
     const { method } = req;
 
     if (method === 'POST') {
-        const { title,
-            slug,
-            images,
-            description,
-            blogcategory,
-            tags,
-            status
-        } = req.body;
-        const blogDoc = await Blog.create({
-            title,
-            slug,
-            images,
-            description,
-            blogcategory,
-            tags,
-            status
-        })
-
-        res.json(blogDoc)
-    }
-
-    if (method === 'GET') {
-        if (req.query?.id) {
-            res.json(await Blog.findById(req.query.id))
-        } else {
-            res.json((await Blog.find()).reverse())
+        try {
+            const { title, slug, images, description, blogcategory, tags, status } = req.body;
+            const blogDoc = await Blog.create({
+                title,
+                slug,
+                images,
+                description,
+                blogcategory,
+                tags,
+                status
+            });
+            res.status(201).json(blogDoc);
+        } catch (error) {
+            console.error('Error creating blog:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
         }
     }
 
