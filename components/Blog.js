@@ -3,27 +3,102 @@ import MarkdownEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
 import Spinner from "./Spinner";
 import { text } from "@cloudinary/url-gen/qualifiers/source";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function Blog() {
+
+    const [redirect, setRedirect] = useState(false);
+    const router = useRouter();
+
+    const [title, setTitle] = useState('');
+    const [slug, setslug] = useState('');
+    const [images, setimages] = useState([]);
+    const [description, setdescription] = useState('');
+    const [blogcategory, setblogcategory] = useState([]);
+    const [tags, settags] = useState([]);
+    const [status, setstatus] = useState('');
+
+    //for image uploading
+    const [isUploading, setIsUploading] = useState(false);
+    const uploadImageQueue = [];
+
+    async function createBlog(ev) {
+        ev.preventDefault();
+
+        const data = {
+            title,
+            slug,
+            images,
+            description,
+            blogcategory,
+            tags,
+            status
+        };
+
+        if (_id) {
+            await axios.put('/api/blogs', { ...data, _id })
+            toast.success('Data Updated Successfully')
+        } else {
+            await axios.post('/api/blogs', data)
+            toast.success('Blog Created Successfully')
+        }
+
+        setRedirect(true);
+    };
+
+
+    // for slug url
+    const handleSlugChange = (ev) => {
+        const inputValue = ev.target.value;
+        const newSlug = inputValue.replace(/\s+/g, '-') //replaces spaces with hyphens
+
+        setslug(newSlug);
+    };
+
     return (
         <>
-            <form className="addWebsiteform">
+            <form className="addWebsiteform" onSubmit={createBlog}>
                 {/* blog title */}
                 <div className="w-100 flex flex-col flex-left mb-2">
                     <label htmlFor="title">Title</label>
-                    <input type="text" id="title" placeholder="Enter title" />
+                    <input
+                        type="text"
+                        id="title"
+                        placeholder="Enter title"
+                        value={title}
+                        onChange={ev => setTitle(ev.target.value)}
+                    />
                 </div>
 
                 {/* blog slug url */}
                 <div className="w-100 flex flex-col flex-left mb-2">
                     <label htmlFor="title">Slug (SEO friendly URL)</label>
-                    <input type="text" id="slug" placeholder="Enter Slug URL" />
+                    <input
+                        type="text"
+                        id="slug"
+                        placeholder="Enter Slug URL"
+                        value={slug}
+                        onChange={handleSlugChange}
+                    />
                 </div>
 
                 {/* blog category */}
                 <div className="w-100 flex flex-col flex-left mb-2">
                     <label htmlFor="category"> Select Category</label>
-                    <select name="category" id="category" multiple>
+                    <select
+                        name="category"
+                        id="category"
+                        multiple
+                        value={blogcategory}
+                        onChange={(e) => setblogcategory(
+                            Array.from(
+                                e.target.selectedOptions, option => option.value
+                            )
+                        )}
+                    >
                         <option value="React Js"> React Js</option>
                         <option value="Three Js"> Three Js</option>
                         <option value="Next Js"> Next Js</option>
@@ -73,25 +148,25 @@ export default function Blog() {
                     </label>
 
                     <MarkdownEditor
-                        
+
                         style={{ width: "98%", height: "650px" }}
 
                         renderHTML={(text) => (
                             <ReactMarkdown components={{
-                                code: ({node, inline, className, children, ...props}) => {
+                                code: ({ node, inline, className, children, ...props }) => {
 
                                     // for code
                                     const match = /language-(\w+)/.exec(className || '')
-                                    
+
                                     if (inline) {
                                         return <code>{children}</code>
-                                    } else if(match) {
+                                    } else if (match) {
                                         return (
-                                            <div style={{position: 'relative'}}>
-                                                <pre style={{padding: '0', borderRadius:'5px', overflow: 'auto', whiteSpace: 'pre-wrap'}} {...props}>
+                                            <div style={{ position: 'relative' }}>
+                                                <pre style={{ padding: '0', borderRadius: '5px', overflow: 'auto', whiteSpace: 'pre-wrap' }} {...props}>
                                                     <code>{children}</code>
                                                 </pre>
-                                                <button style={{position: 'absolute', top: '0', right: '0', zIndex: '1'}} onClick={() => navigator.clipboard.writeText(children)}>
+                                                <button style={{ position: 'absolute', top: '0', right: '0', zIndex: '1' }} onClick={() => navigator.clipboard.writeText(children)}>
                                                     copy code
                                                 </button>
                                             </div>
