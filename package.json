@@ -15,7 +15,7 @@
     "aos": "^2.3.4",
     "axios": "^1.7.2",
     "chart.js": "^4.4.2",
-    "cloudinary": "^2.2.0",
+    "cloudinary": "^2.5.1",
     "cloudinary-react": "^1.8.1",
     "faker": "5.5.3",
     "mongodb": "^6.12.0",
