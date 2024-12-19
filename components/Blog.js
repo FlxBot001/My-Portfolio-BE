@@ -45,9 +45,11 @@ export default function Blog(
         if (_id) {
             await axios.put('/api/blogs', { ...data, _id })
             toast.success('Data Updated Successfully')
+            router.push('/blogs')
         } else {
             await axios.post('/api/blogs', data)
             toast.success('Blog Created Successfully')
+            router.push('/blogs')
         }
 
         setRedirect(true);
