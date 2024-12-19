@@ -6,7 +6,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import toast from "react-hot-toast";
-
+import { ReactSortable } from "react-sortablejs";
+import { FcReuse } from "react-icons/fc";
 
 export default function Blog(
     {
@@ -73,12 +74,32 @@ export default function Blog(
                     })
                 )
             }
+
+            // wait for all images to finish uploading
+
+            await Promise.all(uploadImageQueue);
+
+            setIsUploading(false);
+            toast.success('Images Uploaded Succesfully')
+        } else {
+            toast.error('An error occurred during the upload!')
         }
     }
 
     if (redirect) {
         router.push('/blogs')
         return null;
+    }
+
+    function uploadImagesOrder(images) {
+        setimages(images)
+    }
+
+    function handleDeleteImage(index) {
+        const updateImages = [...images];
+        uploadImages.splice(index, 1);
+        setimages(updateImages);
+        toast.success('Images Deleated Successfully')
     }
 
 
@@ -146,7 +167,7 @@ export default function Blog(
                     </select>
                 </div>
 
-                {/* blog image */}
+                {/* blog images */}
                 <div className="w-100 flex flex-col flex-left mb-2">
                     <div className="w-100">
                         <label htmlFor="images">
@@ -159,15 +180,34 @@ export default function Blog(
                             className="mt-1"
                             accept="image/*"
                             multiple
+                            onChange={uploadImages}
                         />
                     </div>
                     <div className="w-100 flex flex-left mt-1">
-                        <Spinner />
+                        {isUploading && (<Spinner />)}
                     </div>
                 </div>
 
-                {/* image preview and Image sortable*/}
-                {/* pending */}
+                {/* image preview and Image sortable with delete*/}
+                {!isUploading && (
+                    <div className="flex">
+                        <ReactSortable 
+                            list={Array.isArray(images) ? images : []}
+                            setList={uploadImagesOrder}
+                            animation={200}
+                            className="flex gap-1"                       
+                        >
+                            {images?.map((link, index) => (
+                                <div className="uploadedimg">
+                                    <img src={link} alt="image" className="object-cover" />
+                                    <div className="deleteimg">
+                                        <button onClick={() => handleDeleteImage(index)}><FcReuse /></button>
+                                    </div>
+                                </div>
+                            ))}
+                        </ReactSortable>
+                    </div>
+                )}
 
                 {/* markdown description */}
                 <div className="description w-100 flex flex-col flex-left mb-2">
