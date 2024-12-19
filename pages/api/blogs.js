@@ -11,21 +11,21 @@ export default async function handle(req, res) {
     const { method } = req;
 
     if (method === 'POST') {
-        const { title, 
-                slug, 
-                images, 
-                description, 
-                blogcategory, 
-                tags, 
-                status 
-            } = req.body;
+        const { title,
+            slug,
+            images,
+            description,
+            blogcategory,
+            tags,
+            status
+        } = req.body;
         const blogDoc = await Blog.create({
-            title, 
-            slug, 
-            images, 
-            description, 
-            blogcategory, 
-            tags, 
+            title,
+            slug,
+            images,
+            description,
+            blogcategory,
+            tags,
             status
         })
 
@@ -41,24 +41,24 @@ export default async function handle(req, res) {
     }
 
     if (method === 'PUT') {
-        const { 
-            _id, 
-            title, 
-            slug, 
-            images, 
-            description, 
-            blogcategory, 
-            tags, 
-            status 
+        const {
+            _id,
+            title,
+            slug,
+            images,
+            description,
+            blogcategory,
+            tags,
+            status
         } = req.body;
 
-        await Blog.updateOne({_id}, {
-            title, 
-            slug, 
-            images, 
-            description, 
-            blogcategory, 
-            tags, 
+        await Blog.updateOne({ _id }, {
+            title,
+            slug,
+            images,
+            description,
+            blogcategory,
+            tags,
             status
         });
 
@@ -66,7 +66,10 @@ export default async function handle(req, res) {
     }
 
     if (method === 'DELETE') {
-        
+        if (req.query?.id) {
+            await Blog.deleteOne({ _id: req.query?.id })
+            res.json(true)
+        }
     }
 
 }
