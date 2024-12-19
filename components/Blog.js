@@ -2,13 +2,18 @@ import ReactMarkdown from "react-markdown";
 import MarkdownEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
 import Spinner from "./Spinner";
-import { text } from "@cloudinary/url-gen/qualifiers/source";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { ReactSortable } from "react-sortablejs";
+import { FcReuse } from "react-icons/fc";
 
-export default function Blog() {
+export default function Blog(
+    {
+        _id
+    }
+) {
 
     const [redirect, setRedirect] = useState(false);
     const router = useRouter();
@@ -27,6 +32,10 @@ export default function Blog() {
 
     async function createBlog(ev) {
         ev.preventDefault();
+
+        if (isUploading) {
+            await Promise.all(uploadImageQueue)
+        }
 
         const data = {
             title,
@@ -48,6 +57,50 @@ export default function Blog() {
 
         setRedirect(true);
     };
+
+    async function uploadImages(ev) {
+        const files = ev.target?.files;
+        if (files?.length > 0) {
+            setIsUploading(true);
+
+            for(const file of files) {
+                const data = new FormData();
+                data.append('file', file);
+
+                // use the axios.post method and push the promise to the queue
+                uploadImageQueue.push(
+                    axios.post('/api/upload', data).then(res => {
+                        setimages(oldImages => [...oldImages, ...res.data.links])
+                    })
+                )
+            }
+
+            // wait for all images to finish uploading
+
+            await Promise.all(uploadImageQueue);
+
+            setIsUploading(false);
+            toast.success('Images Uploaded Succesfully')
+        } else {
+            toast.error('An error occurred during the upload!')
+        }
+    }
+
+    if (redirect) {
+        router.push('/blogs')
+        return null;
+    }
+
+    function uploadImagesOrder(images) {
+        setimages(images)
+    }
+
+    function handleDeleteImage(index) {
+        const uploadImages = [...images];
+        uploadImages.splice(index, 1);
+        setimages(uploadImages);
+        toast.success('Images Deleated Successfully')
+    }
 
 
     // for slug url
@@ -114,7 +167,7 @@ export default function Blog() {
                     </select>
                 </div>
 
-                {/* blog image */}
+                {/* blog images */}
                 <div className="w-100 flex flex-col flex-left mb-2">
                     <div className="w-100">
                         <label htmlFor="images">
@@ -127,15 +180,34 @@ export default function Blog() {
                             className="mt-1"
                             accept="image/*"
                             multiple
+                            onChange={uploadImages}
                         />
                     </div>
                     <div className="w-100 flex flex-left mt-1">
-                        <Spinner />
+                        {isUploading && (<Spinner />)}
                     </div>
                 </div>
 
-                {/* image preview and Image sortable*/}
-                {/* pending */}
+                {/* image preview and Image sortable with delete*/}
+                {!isUploading && (
+                    <div className="flex">
+                        <ReactSortable 
+                            list={Array.isArray(images) ? images : []}
+                            setList={uploadImagesOrder}
+                            animation={200}
+                            className="flex gap-1"                       
+                        >
+                            {images?.map((link, index) => (
+                                <div className="uploadedimg">
+                                    <img src={link} alt="image" className="object-cover" />
+                                    <div className="deleteimg">
+                                        <button onClick={() => handleDeleteImage(index)}><FcReuse /></button>
+                                    </div>
+                                </div>
+                            ))}
+                        </ReactSortable>
+                    </div>
+                )}
 
                 {/* markdown description */}
                 <div className="description w-100 flex flex-col flex-left mb-2">
@@ -150,7 +222,7 @@ export default function Blog() {
 
                         onChange={(ev) => setdescription(ev.text)}
 
-                        style={{ width: "98%", height: "650px" }}
+                        style={{ width: "98%", height: "800px" }}
 
                         renderHTML={(text) => (
                             <ReactMarkdown components={{
@@ -168,7 +240,7 @@ export default function Blog() {
                                                     <code>{children}</code>
                                                 </pre>
                                                 <button style={{ position: 'absolute', top: '0', right: '0', zIndex: '1' }} onClick={() => navigator.clipboard.writeText(children)}>
-                                                    copy code
+                                                    copy
                                                 </button>
                                             </div>
                                         )
@@ -212,7 +284,12 @@ export default function Blog() {
                 {/* blog status */}
                 <div className="w-100 flex flex-col flex-left mb-2">
                     <label htmlFor="status">Status</label>
-                    <select name="status" id="status">
+                    <select
+                        name="status"
+                        id="status"
+                        value={status}
+                        onChange={ev => setstatus(ev.target.value)}
+                    >
                         <option value="">Select Option</option>
                         <option value="draft">Draft</option>
                         <option value="publish">Publish</option>
