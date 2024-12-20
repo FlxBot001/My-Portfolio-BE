@@ -61,11 +61,11 @@ export default function Project(
         };
 
         if (_id) {
-            await axios.put('/api/blogs', { ...data, _id })
+            await axios.put('/api/projects', { ...data, _id })
             toast.success('Data Updated Successfully')
         } else {
-            await axios.post('/api/blogs', data)
-            toast.success('Blog Created Successfully')
+            await axios.post('/api/projects', data)
+            toast.success('Project Created Successfully')
         }
 
         setRedirect(true);
@@ -100,7 +100,7 @@ export default function Project(
     }
 
     if (redirect) {
-        router.push('/blogs')
+        router.push('/projects');
         return null;
     }
 
@@ -165,13 +165,13 @@ export default function Project(
 
                 {/* project live pre-view */}
                 <div className="w-100 flex flex-col flex-left mb-2">
-                    <label htmlFor="client">Client Name</label>
+                    <label htmlFor="client">Live Preview</label>
                     <input
                         type="text"
-                        id="client"
-                        placeholder="Enter Slug Name"
-                        value={client}
-                        onChange={ev => setclient(ev.target.value)}
+                        id="livepreview"
+                        placeholder="Enter live preview URL"
+                        value={livepreview}
+                        onChange={ev => setlivepreview(ev.target.value)}
                     />
                 </div>
 
@@ -329,7 +329,7 @@ export default function Project(
 
                 {/* submit Button */}
                 <div className="w-100 mb-3">
-                    <button type="submit" className="w-100 addwebbtn flex-center">SAVE BLOG</button>
+                    <button type="submit" className="w-100 addwebbtn flex-center">SAVE DATA</button>
                 </div>
             </form>
         </>
