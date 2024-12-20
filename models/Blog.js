@@ -13,4 +13,4 @@ const BlogSchema = new Schema({
     timestamps: true, // This will automatically manage createdAt and UpdatedAt
 });
 
-export const Blog = model.Blog || model('Blog', BlogSchema, 'blogs');
+export const Blog = models.Blog || model('Blog', BlogSchema, 'blogs');
