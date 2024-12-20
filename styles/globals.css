@@ -313,7 +313,7 @@ button {
     width: 40px;
     height: 40px;
     background-color: #eee8fa;
-    color: #5f22db;
+    color: #111dcc;
     font-size: 20px;
     border-radius: 50%;
     cursor: pointer;
@@ -341,7 +341,7 @@ button {
     height: 100vh;
     background-color: #fff;
     z-index: 9;
-    box-shadow: 0 0 10px #c4c4c4;
+    box-shadow: 0 0 10px #a3a0a0;
     transition: 0.3s ease-in-out;
 }
 
@@ -367,7 +367,7 @@ button {
 } */
 
 .navactives {
-    background-color: #7e37d8;
+    background-color: #111dcc;
     color: #fff;
 }
 
@@ -386,7 +386,7 @@ button {
 }
 
 .asideleft ul li ul li:hover {
-    background-color: #7e37d8;
+    background-color: #111dcc;
     color: #fff;
 }
 
@@ -414,7 +414,7 @@ button {
     outline: none;
     border-radius: 10px;
     background-color: #e6dbfb;
-    color: #5f22db;
+    color: #c00303;
     transition: 0.3s;
 }
 .logoutbtn:hover{
@@ -442,7 +442,7 @@ button {
 }
 
 .titledashboard h2 {
-    color: #7e37d8;
+    color: #111dcc;
     font-size: 2rem;
     font-weight: 800;
 }
@@ -454,7 +454,7 @@ button {
 .titledashboard h3 {
     display: block;
     text-transform: uppercase;
-    color: #7e37d8;
+    color: #111dcc;
     letter-spacing: 4px;
     font-weight: 700;
 }
@@ -467,12 +467,12 @@ button {
 
 .breadcrumb svg {
     font-size: 22px;
-    color: #571f9e;
+    color: #111dcc;
 }
 
 .breadcrumb span {
     font-size: 22px;
-    color: #571f9e;
+    color: #111dcc;
 }
 
 /* fourcards */
@@ -490,7 +490,7 @@ button {
     position: relative;
     width: 380px;
     height: 250px;
-    background-image: linear-gradient(to bottom right, #9358e0, #571f9e);
+    background-image: linear-gradient(to bottom right, #9358e0, #111dcc);
     box-shadow: 2px 12px 26px 3px rgba(126, 55, 216, .3);
     color: #fff;
     display: flex;
@@ -582,7 +582,7 @@ button {
     width: 50px;
     height: 50px;
     border-radius: 80% !important;
-    background-color: #7e37d8 !important;
+    background-color: #111dcc !important;
     color: #fff;
 }
 
@@ -637,7 +637,7 @@ button {
     height: 4px;
     left: 42px;
     top: 37px;
-    background-color: #7e37d8 !important;
+    background-color: #111dcc !important;
     color: #fff;
 }
 
@@ -705,7 +705,7 @@ button {
     padding: 10px;
     border: 1px solid #999;
     font-size: 22px;
-    outline-color: #571f9e;
+    outline-color: #111dcc;
     box-shadow: 0 0 5px #999;
     border-radius: 10px;
 }
