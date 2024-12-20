@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FcSurvey } from "react-icons/fc";
+import { useRouter } from "next/router";
 
 export default function DeleteProduct() {
     const router = useRouter();

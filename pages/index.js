@@ -72,9 +72,7 @@ export default function Home() {
   }, []);
 
   // Aggeregate data by the year and month
-  const monthlyData = blogData
-    .filter((dat) => dat.status === "publish")
-    .reduce((acc, blog) => {
+  const monthlyData = blogData.filter((dat) => dat.status === "publish").reduce((acc, blog) => {
       const year = new Date(blog.createdAt).getFullYear(); // get the year
       const month = new Date(blog.createdAt).getMonth(); // get the month
       acc[year] = acc[year] || Array(12).fill(0); // Initialize array for the year if not exists
@@ -102,7 +100,7 @@ export default function Home() {
   const datasets = years.map((year) => ({
     label: `${year}`,
     data: monthlyData[year] || Array(12).fill(0), // if no data for a month, default to 0
-    backgroundColor: "rgba(255, 0, 0, 0.6)",
+    backgroundColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.6)`,
   }));
 
   const data = {
@@ -137,7 +135,7 @@ export default function Home() {
           {/* card 1 */}
           <div className="four_card">
             <h2>Total Blogs</h2>
-            <span>5</span>
+            <span>{blogData.filter(dat => dat.status === 'publish').length}</span>
           </div>
 
           {/* card 2 */}
