@@ -50,18 +50,18 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const response = await fetch("/api/blogs");
-        const responseproject = await fetch("/api/projects");
-        const responseShop = await fetch("/api/shops");
-        const responseGallery = await fetch("/api/photos");
+        //const responseproject = await fetch("/api/projects");
+        //const responseShop = await fetch("/api/shops");
+        //const responseGallery = await fetch("/api/photos");
         const data = await response.json();
-        const dataProject = await responseproject.json();
-        const dataShop = await responseShop.json();
-        const dataPhotos = await responseGallery.json();
+        //const dataProject = await responseproject.json();
+        //const dataShop = await responseShop.json();
+        //const dataPhotos = await responseGallery.json();
 
         setBlogData(data); // assuming data is a array of blog objects
-        setProjectData(dataProject);
-        setShopData(dataShop);
-        setPhotoData(dataPhotos);
+        //setProjectData(dataProject);
+        //setShopData(dataShop);
+        //setPhotoData(dataPhotos);
         setLoading(false); // after featchig the data make loading false
       } catch (error) {
         setLoading(false); // if there is an error make loading false
@@ -73,16 +73,16 @@ export default function Home() {
 
   // Aggeregate data by the year and month
   const monthlyData = blogData.filter((dat) => dat.status === "publish").reduce((acc, blog) => {
-      const year = new Date(blog.createdAt).getFullYear(); // get the year
-      const month = new Date(blog.createdAt).getMonth(); // get the month
-      acc[year] = acc[year] || Array(12).fill(0); // Initialize array for the year if not exists
-      acc[year][month]++; // increment the count for the month
-      return;
-    }, {});
+    const year = new Date(blog.createdAt).getFullYear(); // get the year
+    const month = new Date(blog.createdAt).getMonth(); // get the month
+    acc[year] = acc[year] || Array(12).fill(0); // Initialize array for the year if not exists
+    acc[year][month]++; // increment the count for the month
+    return acc; // return the accumulator
+}, {});
 
-  const currentYear = new Date().getFullYear(); // get the current year
-  const years = Object.keys(monthlyData); // get the years from the data
-  const label = [
+const currentYear = new Date().getFullYear(); // get the current year
+const years = Object.keys(monthlyData); // get the years from the data
+const label = [
     "Jan",
     "Feb",
     "Mar",
@@ -132,25 +132,25 @@ export default function Home() {
 
         {/* dashboard four cards */}
         <div className="topfourcards flex flex-sb">
-          {/* card 1 */}
+          {/* Blogs card */}
           <div className="four_card">
             <h2>Total Blogs</h2>
             <span>{blogData.filter(dat => dat.status === 'publish').length}</span>
           </div>
 
-          {/* card 2 */}
+          {/* Projects card */}
           <div className="four_card">
             <h2>Total Projects</h2>
             <span>5</span>
           </div>
 
-          {/* card 3 */}
+          {/* Products card */}
           <div className="four_card">
             <h2>Total Products</h2>
             <span>5</span>
           </div>
 
-          {/* card 4 */}
+          {/* Gallery's card */}
           <div className="four_card">
             <h2>Gallery Photos</h2>
             <span>5</span>
@@ -171,12 +171,18 @@ export default function Home() {
                 <li className="small-dot"></li>
               </ul>
               <h3 className="text-right">
-                10 / 365 <br /> <span>Total Published</span>
+              {blogData.filter(dat => dat.status === 'publish').length} / 365 <br /> <span>Total Published</span>
               </h3>
             </div>
             <Bar data={data} options={options} />
           </div>
+
+          <div className="right_salescont">
+            
+          </div>
         </div>
+
+
       </div>
     </>
   );
