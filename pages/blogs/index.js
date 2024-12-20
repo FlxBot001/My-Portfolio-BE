@@ -2,6 +2,7 @@ import Dataloading from "@/components/Dataloading";
 import useFetchData from "@/hooks/useFetchData";
 import { useState } from "react";
 import { FcApproval, FcFullTrash, FcSurvey } from "react-icons/fc";
+import Link from "next/link";
 
 export default function Blogs() {
     // pagination
@@ -45,88 +46,84 @@ export default function Blogs() {
     }
 
     return (
-        <>
-            <div className="blogpage">
-                <div className="titledashboard flex flex-sb">
-                    <div>
-                        <h2>
-                            All Published <span>Blogs</span>
-                        </h2>
-                        <h3>ADMIN PANEL</h3>
-                    </div>
-                    <div className="breadcrumb">
-                        <FcSurvey /> <span>/</span> <span>Blogs</span>
-                    </div>
+        <div className="blogpage">
+            <div className="titledashboard flex flex-sb">
+                <div>
+                    <h2>
+                        All Published <span>Blogs</span>
+                    </h2>
+                    <h3>ADMIN PANEL</h3>
                 </div>
-                <div className="blogstable">
-                    <div className="flex gap-2 mb-1">
-                        <h2>Search Blogs:</h2>
-                        <input
-                            type="text"
-                            placeholder="Serch by title..."
-                            value={searchQuery}
-                            onChange={(ev) => setSearchQuery(ev.target.value)}
-                        />
-                    </div>
-                    <table className="table table-styling">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Image</th>
-                                <th>Title</th>
-                                <th>Edit / Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {loading ? (
-                                <>
-                                    <tr>
-                                        <td>
-                                            <Dataloading />
-                                        </td>
-                                    </tr>
-                                </>
-                            ) : (
-                                <>
-                                    {publishedblogs.length === 0 ? (
-                                        <tr>
-                                            <td colSpan={4} className="text-center">
-                                                No Blogs Found
-                                            </td>
-                                        </tr>
-                                    ) : (
-                                        publishedblogs.map((blog, index) => (
-                                            <tr key={blog._id}>
-                                                <td>{indexOfFirstBlog + index + 1}</td>
-                                                <td>
-                                                    <img src={blog.images[0]} width={180} alt="image" />
-                                                </td>
-                                                <td>
-                                                    <h3>{blog.title}</h3>
-                                                </td>
-                                                <td>
-                                                    <div className="flex gap-2 flex-center">
-                                                        <Link href={"/blogs/edit/" + blog._id}>
-                                                            <button>
-                                                                <FcApproval />
-                                                            </button>
-                                                        </Link>
-                                                        <Link href={"/blogs/delete/" + blog._id}>
-                                                            <button>
-                                                                <FcFullTrash />
-                                                            </button>
-                                                        </Link>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        ))
-                                    )}
-                                </>
-                            )}
-                        </tbody>
-                    </table>
+                <div className="breadcrumb">
+                    <FcSurvey /> <span>/</span> <span>Blogs</span>
                 </div>
             </div>
-        </>
+            <div className="blogstable">
+                <div className="flex gap-2 mb-1">
+                    <h2>Search Blogs:</h2>
+                    <input
+                        type="text"
+                        placeholder="Search by title..."
+                        value={searchQuery}
+                        onChange={(ev) => setSearchQuery(ev.target.value)}
+                    />
+                </div>
+                <table className="table table-styling">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Edit / Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {loading ? (
+                            <tr>
+                                <td colSpan={4}>
+                                    <Dataloading />
+                                </td>
+                            </tr>
+                        ) : (
+                            <>
+                                {publishedblogs.length === 0 ? (
+                                    <tr>
+                                        <td colSpan={4} className="text-center">
+                                            No Blogs Found
+                                        </td>
+                                    </tr>
+                                ) : (
+                                    publishedblogs.map((blog, index) => (
+                                        <tr key={blog._id}>
+                                            <td>{indexOfFirstBlog + index + 1}</td>
+                                            <td>
+                                                <img src={blog.images[0]} width={180} alt="image" />
+                                            </td>
+                                            <td>
+                                                <h3>{blog.title}</h3>
+                                            </td>
+                                            <td>
+                                                <div className="flex gap-2 flex-center">
+                                                    <Link href={"/blogs/edit/" + blog._id}>
+                                                        <button>
+                                                            <FcApproval />
+                                                        </button>
+                                                    </Link>
+                                                    <Link href={"/blogs/delete/" + blog._id}>
+                                                        <button>
+                                                            <FcFullTrash />
+                                                        </button>
+                                                    </Link>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))
+                                )}
+                            </>
+                        )}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     );
 }

@@ -1,14 +1,20 @@
 import { mongooseConnect } from "@/lib/mongoose";
 import { Blog } from "@/models/Blog";
 
-
 export default async function handle(req, res) {
-    //If authnticated ...
     await mongooseConnect();
 
     const { method } = req;
 
-    if (method === 'POST') {
+    if (method === 'GET') {
+        try {
+            const blogs = await Blog.find();
+            res.status(200).json(blogs);
+        } catch (error) {
+            console.error('Error fetching blogs:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    } else if (method === 'POST') {
         try {
             const { title, slug, images, description, blogcategory, tags, status } = req.body;
             const blogDoc = await Blog.create({
