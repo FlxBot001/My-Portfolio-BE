@@ -11,24 +11,26 @@ export default async function handle(req, res) {
             const blogs = await Project.find();
             res.status(200).json(blogs);
         } catch (error) {
-            console.error('Error fetching blogs:', error);
+            console.error('Error fetching projects:', error);
             res.status(500).json({ error: 'Internal Server Error' });
         }
     } else if (method === 'POST') {
         try {
-            const { title, slug, images, description, blogcategory, tags, status } = req.body;
-            const blogDoc = await Blog.create({
+            const { title, slug, images, description, client, projectcategory, tags, livepreview, status } = req.body;
+            const blogDoc = await Project.create({
                 title,
                 slug,
                 images,
                 description,
-                blogcategory,
+                client,
+                projectcategory,
                 tags,
+                livepreview,
                 status
             });
             res.status(201).json(blogDoc);
         } catch (error) {
-            console.error('Error creating blog:', error);
+            console.error('Error creating project:', error);
             res.status(500).json({ error: 'Internal Server Error' });
         }
     } else if (method === 'PUT') {
@@ -39,36 +41,40 @@ export default async function handle(req, res) {
                 slug,
                 images,
                 description,
-                blogcategory,
+                client,
+                projectcategory,
                 tags,
+                livepreview,
                 status
             } = req.body;
 
-            await Blog.updateOne({ _id }, {
+            await Project.updateOne({ _id }, {
                 title,
                 slug,
                 images,
                 description,
-                blogcategory,
+                client,
+                projectcategory,
                 tags,
+                livepreview,
                 status
             });
 
             res.status(200).json({ success: true });
         } catch (error) {
-            console.error('Error updating blog:', error);
+            console.error('Error updating project:', error);
             res.status(500).json({ error: 'Internal Server Error' });
         }
     } else if (method === 'DELETE') {
         try {
             if (req.query?.id) {
-                await Blog.deleteOne({ _id: req.query.id });
+                await Project.deleteOne({ _id: req.query.id });
                 res.status(200).json({ success: true });
             } else {
                 res.status(400).json({ error: 'Bad Request' });
             }
         } catch (error) {
-            console.error('Error deleting blog:', error);
+            console.error('Error deleting project:', error);
             res.status(500).json({ error: 'Internal Server Error' });
         }
     } else {
