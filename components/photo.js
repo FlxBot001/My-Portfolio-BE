@@ -52,11 +52,11 @@ export default function Photo(
         };
 
         if (_id) {
-            await axios.put('/api/projects', { ...data, _id })
+            await axios.put('/api/photos', { ...data, _id })
             toast.success('Data Updated Successfully')
         } else {
-            await axios.post('/api/projects', data)
-            toast.success('Project Created Successfully')
+            await axios.post('/api/photos', data)
+            toast.success('Photos Uploaded Successfully')
         }
 
         setRedirect(true);
@@ -91,7 +91,7 @@ export default function Photo(
     }
 
     if (redirect) {
-        router.push('/projects');
+        router.push('/gallery');
         return null;
     }
 
@@ -142,9 +142,9 @@ export default function Photo(
                     />
                 </div>
 
-                {/* photo scenery */}
+                {/* photo scene */}
                 <div className="w-100 flex flex-col flex-left mb-2">
-                    <label htmlFor="scenery">scenery</label>
+                    <label htmlFor="scenery">Scene</label>
                     <input
                         type="text"
                         id="scenery"
@@ -154,7 +154,7 @@ export default function Photo(
                     />
                 </div>
 
-                {/* project images */}
+                {/* images */}
                 <div className="w-100 flex flex-col flex-left mb-2">
                     <div className="w-100">
                         <label htmlFor="images">
@@ -199,7 +199,7 @@ export default function Photo(
                 {/* markdown description */}
                 <div className="description w-100 flex flex-col flex-left mb-2">
                     <label htmlFor="description">
-                        Project Content (for image: 1st upload and copy link, paste in ![alt
+                        Photo Description (for image: 1st upload and copy link, paste in ![alt
                         text](link))
                     </label>
 
@@ -209,7 +209,7 @@ export default function Photo(
 
                         onChange={(ev) => setdescription(ev.text)}
 
-                        style={{ width: "98%", height: "800px" }}
+                        style={{ width: "98%", height: "300px" }}
 
                         renderHTML={(text) => (
                             <ReactMarkdown components={{
@@ -242,11 +242,9 @@ export default function Photo(
                     />
                 </div>
 
-
-
                 {/* submit Button */}
                 <div className="w-100 mb-3">
-                    <button type="submit" className="w-100 addwebbtn flex-center">SAVE DATA</button>
+                    <button type="submit" className="w-100 addwebbtn flex-center">Save Photo</button>
                 </div>
             </form>
         </>
