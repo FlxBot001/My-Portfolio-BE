@@ -144,7 +144,7 @@ export default function Photo(
 
                 {/* photo scene */}
                 <div className="w-100 flex flex-col flex-left mb-2">
-                    <label htmlFor="scenery">scenery</label>
+                    <label htmlFor="scenery">Scene</label>
                     <input
                         type="text"
                         id="scenery"
@@ -199,7 +199,7 @@ export default function Photo(
                 {/* markdown description */}
                 <div className="description w-100 flex flex-col flex-left mb-2">
                     <label htmlFor="description">
-                        Project Content (for image: 1st upload and copy link, paste in ![alt
+                        Photo Description (for image: 1st upload and copy link, paste in ![alt
                         text](link))
                     </label>
 
@@ -209,7 +209,7 @@ export default function Photo(
 
                         onChange={(ev) => setdescription(ev.text)}
 
-                        style={{ width: "98%", height: "800px" }}
+                        style={{ width: "98%", height: "300px" }}
 
                         renderHTML={(text) => (
                             <ReactMarkdown components={{
