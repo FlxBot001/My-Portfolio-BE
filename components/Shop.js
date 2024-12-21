@@ -11,18 +11,15 @@ import { FcReuse } from "react-icons/fc";
 import Head from "next/head";
 
 export default function Shop(
-
-
     {
         _id,
         title: existingTitle,
         slug: existingslug,
         images: existingimages,
         description: existingdescription,
-        client: existingclient,
-        projectcategory: existingprojectcategory,
         tags: existingtags,
-        livepreview: existinglivepreview,
+        afilink: existingafilink,
+        price: existingprice,
         status: existingstatus,
     }
 ) {
@@ -34,10 +31,9 @@ export default function Shop(
     const [slug, setslug] = useState(existingslug || '');
     const [images, setimages] = useState(existingimages || []);
     const [description, setdescription] = useState(existingdescription || '');
-    const [client, setclient] = useState(existingclient || '');
-    const [projectcategory, setprojectcategory] = useState(existingprojectcategory || []);
     const [tags, settags] = useState(existingtags || []);
-    const [livepreview, setlivepreview] = useState(existinglivepreview || '');
+    const [afilink, setafilink] = useState(existingafilink || '');
+    const [price, setprice] = useState(existingprice || '');
     const [status, setstatus] = useState(existingstatus || '');
 
     //for image uploading
@@ -153,54 +149,32 @@ export default function Shop(
                 />
             </div>
 
-            {/* project clients name */}
+            {/* product afiliate link */}
             <div className="w-100 flex flex-col flex-left mb-2">
-                <label htmlFor="client">Client Name</label>
+                <label htmlFor="afilink">Afilate Link</label>
                 <input
                     type="text"
-                    id="client"
-                    placeholder="Enter Slug Name"
-                    value={client}
-                    onChange={ev => setclient(ev.target.value)}
+                    id="afilink"
+                    placeholder="Enter afilink"
+                    value={afilink}
+                    onChange={ev => setafilink(ev.target.value)}
                 />
             </div>
 
-            {/* project live pre-view */}
+            {/* product price */}
             <div className="w-100 flex flex-col flex-left mb-2">
-                <label htmlFor="client">Live Preview</label>
+                <label htmlFor="price">Price</label>
                 <input
                     type="text"
-                    id="livepreview"
-                    placeholder="Enter live preview URL"
-                    value={livepreview}
-                    onChange={ev => setlivepreview(ev.target.value)}
+                    id="price"
+                    placeholder="Enter price tag"
+                    value={price}
+                    onChange={ev => setprice(ev.target.value)}
                 />
             </div>
 
-            {/* project category */}
-            <div className="w-100 flex flex-col flex-left mb-2">
-                <label htmlFor="category"> Select Category</label>
-                <select
-                    name="category"
-                    id="category"
-                    multiple
-                    value={projectcategory}
-                    onChange={(e) => setprojectcategory(
-                        Array.from(
-                            e.target.selectedOptions, option => option.value
-                        )
-                    )}
-                >
-                    {/*<option value=""> Select Category</option>*/}
-                    <option value="Website Development"> Website Development</option>
-                    <option value="Cloud Native Application Development">Cloud Service</option>
-                    <option value="DevOps Pipeline">DevOps Pipeline</option>
-                    <option value="Django">Onpremises to Cloud Migrations</option>
-                    <option value="AI">Penetration Testing</option>
-                </select>
-            </div>
-
-            {/* project images */}
+            
+            {/* product images */}
             <div className="w-100 flex flex-col flex-left mb-2">
                 <div className="w-100">
                     <label htmlFor="images">
