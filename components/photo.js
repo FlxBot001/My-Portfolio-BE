@@ -142,7 +142,7 @@ export default function Photo(
                     />
                 </div>
 
-                {/* photo scenery */}
+                {/* photo scene */}
                 <div className="w-100 flex flex-col flex-left mb-2">
                     <label htmlFor="scenery">scenery</label>
                     <input
@@ -154,7 +154,7 @@ export default function Photo(
                     />
                 </div>
 
-                {/* project images */}
+                {/* images */}
                 <div className="w-100 flex flex-col flex-left mb-2">
                     <div className="w-100">
                         <label htmlFor="images">
@@ -241,8 +241,6 @@ export default function Photo(
                         )}
                     />
                 </div>
-
-
 
                 {/* submit Button */}
                 <div className="w-100 mb-3">
