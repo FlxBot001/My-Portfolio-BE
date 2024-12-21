@@ -23,7 +23,7 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
+
     if(form.password !== form.confirmPassword){
       setError('Password does not match');
       return;
@@ -40,7 +40,10 @@ export default function SignUp() {
     const data = await res.json();
 
     if(data.error){
-      setError('Error happened here');
+      setTimeout(() => {
+        setError('Error creating account');
+      }, 3000); // remove error after 3 seconds
+      
     } else {
       router.push('/auth/signin');
     }
