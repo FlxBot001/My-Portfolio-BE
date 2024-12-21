@@ -52,11 +52,11 @@ export default function Photo(
         };
 
         if (_id) {
-            await axios.put('/api/projects', { ...data, _id })
+            await axios.put('/api/photos', { ...data, _id })
             toast.success('Data Updated Successfully')
         } else {
-            await axios.post('/api/projects', data)
-            toast.success('Project Created Successfully')
+            await axios.post('/api/photos', data)
+            toast.success('Photos Uploaded Successfully')
         }
 
         setRedirect(true);
@@ -91,7 +91,7 @@ export default function Photo(
     }
 
     if (redirect) {
-        router.push('/projects');
+        router.push('/gallery');
         return null;
     }
 
