@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import Loading from "@/components/Loading";
 import { useRouter } from "next/router";
 
-export default function App({ Component, pageProps }) {
+import { SessionProvider } from "next-auth/react";
+
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   const [loading, setLoading] = useState(true);
   const router = useRouter(); // use userouter hook
 
@@ -28,10 +33,7 @@ export default function App({ Component, pageProps }) {
       router.events.off("routeChangeComplete", handleComplete);
       router.events.off("routeChangeError", handleComplete);
     };
-
-
-  },[router.isReady]); // add router.isReady to the dependency array
-
+  }, [router.isReady]); // add router.isReady to the dependency array
 
   const [asideOpen, setAsideOpen] = useState(false);
 
@@ -49,10 +51,18 @@ export default function App({ Component, pageProps }) {
         </div>
       ) : (
         <>
-          <ParentComponent appOpen={asideOpen} appAsideOpen={AsideClickOpen} />
+          <SessionProvider session={session}>
+            <ParentComponent
+              appOpen={asideOpen}
+              appAsideOpen={AsideClickOpen}
+            />
+          </SessionProvider>
+
           <main>
             <div className={asideOpen ? "container" : "container active"}>
-              <Component {...pageProps} />
+              <SessionProvider session={session}>
+                <Component {...pageProps} />
+              </SessionProvider>
             </div>
           </main>
         </>
