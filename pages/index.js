@@ -178,7 +178,48 @@ const label = [
           </div>
 
           <div className="right_salescont">
-            
+            <div>
+              <h3>Blogs By Category</h3>
+              <ul className="creative-dots">
+                <li className="big-dot"></li>
+                <li className="semi-big-dot"></li>
+                <li className="medium-dot"></li>
+                <li className="semi-medium-dot"></li>
+                <li className="semi-small-dot"></li>
+                <li className="small-dot"></li>
+              </ul>
+            </div>
+            <div className="blogscategory flex flex-center">
+              <table>
+                <thead>
+                  <tr>
+                    <td>Topics</td>
+                    <td>Data</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Next Js</td>
+                    <td>{blogData.filter(dat => dat.blogcategory[0] === "Next js").length}</td>
+                  </tr>
+
+                  <tr>
+                    <td>React Js</td>
+                    <td>{blogData.filter(dat => dat.blogcategory[0] === "React Js").length}</td>
+                  </tr>
+
+                  <tr>
+                    <td>Cybersecurity</td>
+                    <td>{blogData.filter(dat => dat.blogcategory[0] === "Cybersecurity").length}</td>
+                  </tr>
+
+                  <tr>
+                    <td>DevOps</td>
+                    <td>{blogData.filter(dat => dat.blogcategory[0] === "DevOps").length}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 

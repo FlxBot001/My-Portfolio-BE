@@ -135,7 +135,7 @@ export default function Blog(
 
                 {/* blog slug url */}
                 <div className="w-100 flex flex-col flex-left mb-2">
-                    <label htmlFor="title">Slug (SEO friendly URL)</label>
+                    <label htmlFor="slug">Slug (SEO friendly URL)</label>
                     <input
                         type="text"
                         id="slug"
