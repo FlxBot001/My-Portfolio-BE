@@ -2,7 +2,7 @@ import Blog from "@/components/Blog";
 import Head from "next/head"
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import LoginLayout from "@/components/LoginLayout";
 import { FcSurvey } from "react-icons/fc";
 
