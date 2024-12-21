@@ -20,7 +20,7 @@ export default function Header({ handleAsideOpen }) {
     }
 
     return <>
-        {/*<LoginLayout>*/}
+        <LoginLayout>
             <header className="header flex flex-sb">
                 <div className="logo flex gap-2">
                     <h1>ADMIN</h1>
@@ -40,7 +40,7 @@ export default function Header({ handleAsideOpen }) {
                     </div>
                 </div>
             </header>
-        {/*</LoginLayout>*/}
+        </LoginLayout>
 
     </>
 }

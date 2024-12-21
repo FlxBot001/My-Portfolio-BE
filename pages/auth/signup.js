@@ -1,97 +1,68 @@
-// pages/auth/signup.js
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-
-export default function SignUp() {
-
-  const [form, setForm] = useState({email: '', password: '', confirmPassword: ''});
-
+const Signup = () => {
+  const [form, setForm] = useState({ email: '', password: '', confirmPassword: '' });
   const [error, setError] = useState('');
-
+  const { status } = useSession();
   const router = useRouter();
 
   // authenticate
   useEffect(() => {
-
-  }, []);
-
+    if (status === 'authenticated') {
+      router.push('/');
+    }
+  }, [status, router]);
 
   const handleChange = (e) => {
-    setForm({...form, [e.target.name]: e.target.value});
-  }
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(form.password !== form.confirmPassword){
-      setError('Password does not match');
+    if (form.password !== form.confirmPassword) {
+      setError('Passwords do not match');
       return;
-    } 
-
-    const res = await fetch(`/api/signup`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(form),
-    });
-
-    const data = await res.json();
-
-    if(data.error){
-      setTimeout(() => {
-        setError('Error creating account');
-      }, 3000); // remove error after 3 seconds
-      
-    } else {
-      router.push('/auth/signin');
     }
 
-  }
+    try {
+      const res = await fetch(`/api/signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (data.error) {
+        setError('Error creating account');
+        setTimeout(() => {
+          setError('');
+        }, 3000); // remove error after 3 seconds
+      } else {
+        router.push('/auth/signin');
+      }
+    } catch (err) {
+      setError('An unexpected error occurred');
+      setTimeout(() => {
+        setError('');
+      }, 3000); // remove error after 3 seconds
+    }
+  };
 
   return (
-
-    <>
-      <div className="flex flex-center full-h">
-        <div className="loginform">
-          <div className="heading">Sign Up Create Admin</div>
-
-          <form className="form" onSubmit={handleSubmit}>
-            <input
-              type="email"
-              className="input"
-              placeholder="Enter email address"
-              name="email"
-              onChange={handleChange}
-            />
-            <input
-              type="password"
-              className="input"
-              placeholder="Enter password"
-              name="password"
-            />
-            <input
-              type="password"
-              className="input"
-              placeholder="Confirm password"
-              name="confirmPassword"
-            />
-            <button className="login-button" type="submit">
-              Sign Up
-            </button>
-            {error && <p>{error}</p>}
-          </form>
-        </div>
-      </div>
-    </>
+    <form onSubmit={handleSubmit}>
+      <input type="email" name="email" value={form.email} onChange={handleChange} required />
+      <input type="password" name="password" value={form.password} onChange={handleChange} required />
+      <input type="password" name="confirmPassword" value={form.confirmPassword} onChange={handleChange} required />
+      {error && <p>{error}</p>}
+      <button type="submit">Sign Up</button>
+    </form>
   );
-}
+};
 
-// export default function singup(){
-//   return <>
-
-//     <h1>You Don't Have permision to Signup To this Admin Dashboard</h1>
-
-//   </>
-// }
+export default Signup;

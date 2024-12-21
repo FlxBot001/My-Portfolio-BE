@@ -1,6 +1,9 @@
 import NextAuth from 'next-auth';
 import connectToDatabase from '@/lib/mongodb';
 import CredentialProvider from 'next-auth/providers/credentials';
+import bcrypt from 'bcryptjs';
+
+
 
 export default NextAuth({
     providers: [
@@ -19,26 +22,25 @@ export default NextAuth({
 
                 const user = await collection.findOne({ email: credentials.email });
 
-                if (user && user.password === credentials.password) {
+                if (user && bcrypt.compareSync(credentials.password, user.password)) {
                     return { id: user._id, email: user.email };
                 }
 
                 return null;
             },
         }),
-
     ],
 
     database: process.env.MONGODB_URI,
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
-                token.id = user.id; // add user to token
+                token.id = user.id;
             }
             return token;
         },
         async session({ session, token }) {
-            session.user._id = token._id;
+            session.user._id = token.id;
             return session;
         }
     },

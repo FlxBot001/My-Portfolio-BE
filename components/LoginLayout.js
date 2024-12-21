@@ -16,7 +16,7 @@ export default function LoginLayout({ children }) {
     const router = useRouter();
 
     if (!session) {
-        router.push('/auth/signup');
+        router.push('/auth/signin');
         return null;
     }
 
