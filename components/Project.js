@@ -8,6 +8,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { ReactSortable } from "react-sortablejs";
 import { FcReuse } from "react-icons/fc";
+import Head from "next/head";
 
 export default function Project(
     {
@@ -243,7 +244,7 @@ export default function Project(
                 {/* markdown description */}
                 <div className="description w-100 flex flex-col flex-left mb-2">
                     <label htmlFor="description">
-                        Blog Content (for image: 1st upload and copy link, paste in ![alt
+                        Project Content (for image: 1st upload and copy link, paste in ![alt
                         text](link))
                     </label>
 
