@@ -39,7 +39,7 @@ export default function gallery() {
 
     // Get the current page's blog
     const currentBlogs = filteredBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
-    const publishedblogs = currentBlogs.filter((ab) => ab.status === "publish");
+    const publishedblogs = currentBlogs;
     const pageNumbers = [];
 
     for (let i = 1; i <= Math.ceil(allblog / perPage); i++) {
