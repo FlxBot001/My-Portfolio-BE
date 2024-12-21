@@ -52,10 +52,9 @@ export default function Shop(
             slug,
             images,
             description,
-            client,
-            projectcategory,
             tags,
-            livepreview,
+            afilink,
+            price,
             status
         };
 
