@@ -244,7 +244,7 @@ export default function Photo(
 
                 {/* submit Button */}
                 <div className="w-100 mb-3">
-                    <button type="submit" className="w-100 addwebbtn flex-center">SAVE DATA</button>
+                    <button type="submit" className="w-100 addwebbtn flex-center">Save Photo</button>
                 </div>
             </form>
         </>
