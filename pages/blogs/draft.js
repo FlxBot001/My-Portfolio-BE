@@ -47,7 +47,7 @@ export default function Draft() {
     }
 
 
-    return <>
+    return (
         <div className="blogpage">
             <div className="titledashboard flex flex-sb">
                 <div>
@@ -129,5 +129,5 @@ export default function Draft() {
                 </table>
             </div>
         </div>
-    </>
+    );
 }
