@@ -9,7 +9,7 @@ export default function DeleteProduct() {
 
     const router = useRouter();
     const { id } = router.query;
-    const [productInfo, setProductInfo] = useState (null);
+    const [productInfo, setProductInfo] = useState(null);
 
     useEffect(() => {
         if (!id) {
@@ -22,7 +22,7 @@ export default function DeleteProduct() {
     }, [id]);
 
     function goBack() {
-        router.push("/blogs");
+        router.push("/projects");
     }
 
     async function deleteBlog() {
@@ -34,8 +34,8 @@ export default function DeleteProduct() {
 
     return <>
         <Head>
-                <title>Delete Project</title>
-            </Head>
+            <title>Delete Project</title>
+        </Head>
 
         <div className="blogpage">
             <div className="titledashboard flex flex-sb">
@@ -46,7 +46,7 @@ export default function DeleteProduct() {
                     <h1>ADMIN PANEL</h1>
                 </div>
                 <div className="breadcrumb">
-                    <FcSurvey /> <span>/</span> <span>Edit Project</span>
+                    <FcSurvey /> <span>/</span> <span>Delete Project</span>
                 </div>
             </div>
             <div className="deletesec flex flex-center wh-100">
