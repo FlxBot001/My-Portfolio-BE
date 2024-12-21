@@ -123,6 +123,9 @@ export default function Blogs() {
                         )}
                     </tbody>
                 </table>
+
+                {/* for pagination */}
+                
             </div>
         </div>
     );
