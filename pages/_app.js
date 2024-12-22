@@ -44,7 +44,7 @@ export default function App({
   return (
     <>
       {loading ? (
-        // loading while load
+        // loading while page loads
         <div className="flex flex-col flex-center wh_100">
           <Loading />
           <h1 className="mt-1">Loading...</h1>
