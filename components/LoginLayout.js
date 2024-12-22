@@ -1,11 +1,16 @@
-import { useSession } from "next-auth/react"
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-
-
+import { useEffect } from "react";
 
 export default function LoginLayout({ children }) {
-
     const { data: session, status } = useSession();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (status === 'authenticated') {
+            router.push('/'); // Redirect to home page after successful login
+        }
+    }, [status, router]);
 
     if (status === 'loading') {
         return <div className="full-h flex flex-center">
@@ -13,23 +18,12 @@ export default function LoginLayout({ children }) {
         </div>
     }
 
-    const router = useRouter();
-
     if (!session) {
-        router.push('/auth/signin');
+        router.push('/');
         return null;
     }
 
-    if (session) {
-
-        return <>
-            { children }
-        </>
-    }
-
     return <>
-    
-    
-    </>
-
+        {children}
+    </>;
 }

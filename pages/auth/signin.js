@@ -1,21 +1,18 @@
 "use client";
 
-import { set } from "mongoose";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function signin() {
   const [loading, setLoading] = useState(false);
-
   const [form, setForm] = useState({
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-
   const [error, setError] = useState("");
-
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -55,8 +52,14 @@ export default function signin() {
         setError("");
       }, 4000);
     }
+  };
 
-
-  return <>
-  </>;
-}}
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="email" name="email" value={form.email} onChange={handleChange} required />
+      <input type="password" name="password" value={form.password} onChange={handleChange} required />
+      {error && <p>{error}</p>}
+      {loading ? <p>Loading...</p> : <button className="text-bue" type="submit">Sign In</button>} {/* Display loading message */}
+    </form>
+  );
+}

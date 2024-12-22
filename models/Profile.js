@@ -23,4 +23,4 @@ ProfileSchema.pre('save', async function(next) {
     }
 });
 
-export const Profile = models.Profile || model('Profile', ProfileSchema, 'admin');
+module.exports = models.Profile || model('Profile', ProfileSchema);

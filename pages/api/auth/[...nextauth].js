@@ -1,9 +1,7 @@
 import NextAuth from 'next-auth';
-import connectToDatabase from '@/lib/mongodb';
+import connectToDatabase from '@/lib/mongodb'; // Ensure this path is correct
 import CredentialProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
-
-
 
 export default NextAuth({
     providers: [
@@ -12,7 +10,7 @@ export default NextAuth({
             name: 'Credentials',
             //The credentials is used to generate a suitable form on the sign in page.
             credentials: {
-                //username: { label: "Username", type: "text" },
+                username: { label: "Username", type: "text" },
                 email: { label: "Email", type: "email" },
                 password: { label: "Password", type: "password" }
             },
@@ -47,6 +45,6 @@ export default NextAuth({
 
     pages: {
         signIn: '/auth/signin',
-    }
-
+    },
+    secret: process.env.NEXTAUTH_SECRET, // Add secret
 })
