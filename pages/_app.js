@@ -51,12 +51,10 @@ export default function App({
         </div>
       ) : (
         <>
-          <SessionProvider session={session}>
-            <ParentComponent
-              appOpen={asideOpen}
-              appAsideOpen={AsideClickOpen}
-            />
-          </SessionProvider>
+          <ParentComponent
+            appOpen={asideOpen}
+            appAsideOpen={AsideClickOpen}
+          />
 
           <main>
             <div className={asideOpen ? "container" : "container active"}>
