@@ -55,11 +55,8 @@ export default function signin() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="email" name="email" value={form.email} onChange={handleChange} required />
-      <input type="password" name="password" value={form.password} onChange={handleChange} required />
-      {error && <p>{error}</p>}
-      {loading ? <p>Loading...</p> : <button className="text-bue" type="submit">Sign In</button>} {/* Display loading message */}
-    </form>
+    <>
+      
+    </>
   );
 }
