@@ -34,7 +34,8 @@ export default function Aside({ asideOpen, handleAsideOpen }) {
   }, [router.pathname]);
 
   return (
-    <>
+    <LoginLayout>
+      <>
         <aside className={asideOpen ? "asideleft active" : "asideleft"}>
           <ul>
             <Link href="/">
@@ -221,6 +222,7 @@ export default function Aside({ asideOpen, handleAsideOpen }) {
           </ul>
           <button className="logoutbtn">Logout</button>
         </aside>
-    </>
+      </>
+    </LoginLayout>
   );
 }
