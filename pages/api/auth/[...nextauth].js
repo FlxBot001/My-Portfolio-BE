@@ -14,7 +14,10 @@ export default NextAuth({
                 email: { label: "Email", type: "email" },
                 password: { label: "Password", type: "password" }
             },
+
+            
             async authorize(credentials, req) {
+                // connecting to database
                 const db = await connectToDatabase();
                 const collection = db.collection('admin');
 
