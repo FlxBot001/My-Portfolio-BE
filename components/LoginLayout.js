@@ -19,11 +19,14 @@ export default function LoginLayout({ children }) {
     }
 
     if (!session) {
-        router.push('/');
+        router.push('/auth/signin');
         return null;
     }
 
-    return <>
-        {children}
-    </>;
+    if (session) {
+        
+        return <>
+            {children}
+        </>;
+    }
 }

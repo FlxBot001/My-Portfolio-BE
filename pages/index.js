@@ -156,6 +156,18 @@ export default function Home() {
               <h2>Gallery Photos</h2>
               <span>{photoData.length}</span>
             </div>
+
+            {/* Gallery's card */}
+            <div className="four_card">
+              <h2>Studies Archievements</h2>
+              <span>00</span>
+            </div>
+
+            {/* Products card */}
+            <div className="four_card">
+              <h2>Research Publications</h2>
+              <span>100</span>
+            </div>
           </div>
 
           {/* year overview */}
