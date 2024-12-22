@@ -150,57 +150,6 @@ export default function Aside({ asideOpen, handleAsideOpen }) {
               )}
             </li>
 
-            <li
-              className={
-                activeLink === "/studies"
-                  ? "navactive flex-col flex-left"
-                  : "flex-col flex-left"
-              }
-              onClick={() => handleLinkClick("/studies")}
-            >
-              <div className="flex gap-1">
-                <FcGraduationCap />
-                <span>Studies</span>
-              </div>
-              {activeLink === "/studies" && (
-                <ul>
-                  <Link href="/studies">
-                    <li>Completed Studies</li>
-                  </Link>
-                  <Link href="/studies/addstudy">
-                    <li>Add Study</li>
-                  </Link>
-                </ul>
-              )}
-            </li>
-
-            <li
-              className={
-                activeLink === "/research"
-                  ? "navactive flex-col flex-left"
-                  : "flex-col flex-left"
-              }
-              onClick={() => handleLinkClick("/research")}
-            >
-              <div className="flex gap-1">
-                <FcDiploma2 />
-                <span>Research</span>
-              </div>
-              {activeLink === "/research" && (
-                <ul>
-                  <Link href="/research">
-                    <li>Published Research</li>
-                  </Link>
-                  <Link href="/research/draft">
-                    <li>Draft Research</li>
-                  </Link>
-                  <Link href="/research/addphoto">
-                    <li>Add Research</li>
-                  </Link>
-                </ul>
-              )}
-            </li>
-
             <Link href="/contacts">
               <li
                 className={activeLink === "/contacts" ? "navactive" : ""}

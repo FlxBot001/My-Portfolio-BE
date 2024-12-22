@@ -8,7 +8,7 @@ import { SessionProvider } from "next-auth/react";
 
 export default function App({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps
 }) {
   const [loading, setLoading] = useState(true);
   const router = useRouter(); // use userouter hook
@@ -58,9 +58,9 @@ export default function App({
 
           <main>
             <div className={asideOpen ? "container" : "container active"}>
-              <SessionProvider session={session}>
+              {/* <SessionProvider session={session}> */}
                 <Component {...pageProps} />
-              </SessionProvider>
+              {/* </SessionProvider> */}
             </div>
           </main>
         </>
