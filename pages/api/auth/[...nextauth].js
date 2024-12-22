@@ -36,7 +36,7 @@ export default NextAuth({
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
-                token.id = user.id;
+                token.id = user.id; // add user id to tocken
             }
             return token;
         },
@@ -49,5 +49,5 @@ export default NextAuth({
     pages: {
         signIn: '/auth/signin',
     },
-    secret: process.env.NEXTAUTH_SECRET, // Add secret
+    //secret: process.env.NEXTAUTH_SECRET, // Add secret
 })
