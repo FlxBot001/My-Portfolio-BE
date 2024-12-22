@@ -110,8 +110,9 @@ export default function Home() {
   };
 
   return (
-    <LoginLayout>
-      <>
+
+    <>
+      <LoginLayout>
         <Head>
           <title>Portfolio Backend</title>
           <meta name="description" content="Blog website backend" />
@@ -239,7 +240,7 @@ export default function Home() {
 
 
         </div>
-      </>
-    </LoginLayout>
+      </LoginLayout>
+    </>
   );
 }
