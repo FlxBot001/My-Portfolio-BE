@@ -1,12 +1,12 @@
 // pages/auth/signup.js
 
-// import { useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function SignUp() {
 
-  // const {data: session, status} = useSession();
+  const { data: session, status } = useSession();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -57,6 +57,7 @@ export default function SignUp() {
     }
   };
 
+
   return (
     <>
       <div className="flex flex-center full-h">
@@ -93,6 +94,7 @@ export default function SignUp() {
             </button>
             {error && <p>{error}</p>}
           </form>
+          <p>Already have an account? <a href="/auth/signin">Sign In</a></p>
         </div>
       </div>
     </>

@@ -5,6 +5,7 @@ import Loading from "@/components/Loading";
 import { useRouter } from "next/router";
 
 import { SessionProvider } from "next-auth/react";
+import Aos from "@/components/Aos";
 
 export default function App({
   Component,
@@ -59,11 +60,13 @@ export default function App({
           </SessionProvider>
 
           <main>
+            {/* <Aos> */}
             <div className={asideOpen ? "container" : "container active"}>
               <SessionProvider session={session}>
                 <Component {...pageProps} />
               </SessionProvider>
             </div>
+            {/* </Aos> */}
           </main>
         </>
       )}

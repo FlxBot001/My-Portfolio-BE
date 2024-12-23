@@ -1,5 +1,6 @@
 import { mongooseConnect } from "@/lib/mongoose";
 import { Profile } from "@/models/Profile";
+import bcrypt from 'bcryptjs';
 
 export default async function handler(req, res) {
     await mongooseConnect();
@@ -15,10 +16,13 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: 'User already exists' });
         }
 
+        // hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         // create new user
         const newUser = await Profile.create({
             email,
-            password
+            password: hashedPassword
         });
 
         // return success
