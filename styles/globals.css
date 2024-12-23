@@ -488,8 +488,8 @@ button {
 
 .four_card {
     position: relative;
-    width: 380px;
-    height: 250px;
+    width: 340px;
+    height: 180px;
     background-image: linear-gradient(to bottom right, #9358e0, #111dcc);
     box-shadow: 2px 12px 26px 3px rgba(126, 55, 216, .3);
     color: #fff;
@@ -516,8 +516,18 @@ button {
     box-shadow: 2px 12px 26px 3px rgba(6, 181, 221, .3);
 }
 
+.four_card:nth-child(5) {
+    background-image: linear-gradient(to bottom right, #12d700, #07b2dd);
+    box-shadow: 2px 12px 26px 3px rgba(221, 121, 6, 0.39);
+}
+
+.four_card:nth-child(6) {
+    background-image: linear-gradient(to bottom right, #d70000, #07b2dd);
+    box-shadow: 2px 12px 26px 3px rgba(203, 6, 221, 0.3);
+}
+
 .four_card h2 {
-    font-size: 2rem;
+    font-size: 18px;
     text-shadow: 0 0 10px #999;
 }
 
