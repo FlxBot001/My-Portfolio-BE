@@ -59,9 +59,6 @@ export default function Aside({ asideOpen, handleAsideOpen }) {
                   <Link href="/blogs">
                     <li>All Blogs</li>
                   </Link>
-                  <Link href="/blogs">
-                    <li>All Blogs</li>
-                  </Link>
                   <Link href="/blogs/draft">
                     <li>Draft Blogs</li>
                   </Link>

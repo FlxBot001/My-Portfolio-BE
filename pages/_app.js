@@ -60,13 +60,13 @@ export default function App({
           </SessionProvider>
 
           <main>
-            {/* <Aos> */}
+            <Aos>
             <div className={asideOpen ? "container" : "container active"}>
               <SessionProvider session={session}>
                 <Component {...pageProps} />
               </SessionProvider>
             </div>
-            {/* </Aos> */}
+            </Aos>
           </main>
         </>
       )}
