@@ -5,6 +5,12 @@ export default function SignUp() {
   
   return (
     <>
+
+    <div className="loginform">
+      <div className="heading">Sign Up Create Admin</div> 
+
+
+    </div>
     </>
   );
 }
