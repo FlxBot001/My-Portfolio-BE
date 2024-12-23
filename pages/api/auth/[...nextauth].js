@@ -36,12 +36,12 @@ export default NextAuth({
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
-                token.id = user.id; // add user id to tocken
+                token.id = user.id; // add user id to token
             }
             return token;
         },
         async session({ session, token }) {
-            session.user._id = token.id;
+            session.user._id = token.id; // Set session user name to user id
             return session;
         }
     },
