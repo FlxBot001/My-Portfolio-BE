@@ -41,9 +41,10 @@ export default function SignUp() {
     const data = await res.json();
 
     if (data.error) {
+      setError('Error happened')
       setTimeout(() => {
-        setError('Error happened')
-      }, 3000)
+        setError('')
+      }, 3000); // remove error in 3 sec
     } else {
       router.push('/auth/signin');
     }
