@@ -10,7 +10,6 @@ import {
   FcInTransit,
   FcAddressBook,
 } from "react-icons/fc";
-import LoginLayout from "./LoginLayout";
 import { useSession, signOut } from "next-auth/react";
 
 export default function Aside({ asideOpen, handleAsideOpen }) {
@@ -38,7 +37,6 @@ export default function Aside({ asideOpen, handleAsideOpen }) {
 
     return (
       <>
-        {/* <LoginLayout> */}
         <aside className={asideOpen ? "asideleft active" : "asideleft"}>
           <ul>
             <Link href="/">
@@ -177,7 +175,6 @@ export default function Aside({ asideOpen, handleAsideOpen }) {
             onClick={() => signOut()}
           >Logout</button>
         </aside>
-        {/* </LoginLayout> */}
       </>
     );
   }
