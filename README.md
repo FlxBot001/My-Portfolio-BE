@@ -1,40 +1,155 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Backend for Portfolio Website
 
-## Getting Started
+[![GitHub license](https://img.shields.io/github/license/FlxBot001/My-Portfolio-BE)](https://github.com/FlxBot001/My-Portfolio-BE/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/FlxBot001/My-Portfolio-BE)](https://github.com/FlxBot001/My-Portfolio-BE/issues)
+[![GitHub stars](https://img.shields.io/github/stars/FlxBot001/My-Portfolio-BE)](https://github.com/FlxBot001/My-Portfolio-BE/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/FlxBot001/My-Portfolio-BE)](https://github.com/FlxBot001/My-Portfolio-BE/network)
 
-First, run the development server:
+This is the backend for the portfolio website, built with Next.js and designed to support various features such as a gallery, blogs, projects, shops, contact functionality, and customizable settings.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 1. **Gallery**
+   - Upload and manage images.
+   - Categorize images into albums or tags.
+   - Support for responsive image formats.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### 2. **Blogs**
+   - Create, edit, and delete blog posts.
+   - Support for rich-text content.
+   - Organize blogs by categories and tags.
+   - SEO-friendly URLs for blog posts.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### 3. **Projects**
+   - Showcase your projects.
+   - Include details like project title, description, links, and images.
+   - Support for filtering projects by category.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### 4. **Shops**
+   - Manage product listings for an integrated shop.
+   - Features include product images, descriptions, prices, and categories.
+   - Integration with payment gateways for transactions.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 5. **Contact**
+   - Contact form for user inquiries.
+   - Backend support for sending emails.
+   - Store messages in the database for future reference.
 
-## Learn More
+### 6. **Settings**
+   - Admin panel for customizing site settings.
+   - Update site title, theme, and other global configurations.
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies Used
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Next.js**: Framework for building the backend and server-side rendering.
+- **Node.js**: Backend runtime environment.
+- **Express** (if applicable): Middleware for handling API requests.
+- **MongoDB**: Database for storing content like blogs, projects, and settings.
+- **Cloudinary**: Image management and optimization (optional).
+- **SendGrid/Mailgun**: For managing contact form emails.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Installation
 
-## Deploy on Vercel
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/FlxBot001/My-Portfolio-BE.git
+   cd portfolio-backend
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. Set up environment variables:
+   Create a `.env.local` file in the root directory and configure the following:
+   ```env
+   DATABASE_URL=<your-mongodb-connection-string>
+   CLOUDINARY_URL=<your-cloudinary-url>
+   SENDGRID_API_KEY=<your-sendgrid-api-key>
+   NEXT_PUBLIC_BASE_URL=<your-site-url>
+   ```
+
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Access the backend at `http://localhost:3000`.
+
+## API Endpoints
+
+### Gallery
+- `GET /api/gallery`: Fetch all images.
+- `POST /api/gallery`: Upload a new image.
+- `DELETE /api/gallery/:id`: Delete an image.
+
+### Blogs
+- `GET /api/blogs`: Fetch all blog posts.
+- `POST /api/blogs`: Create a new blog post.
+- `PUT /api/blogs/:id`: Update a blog post.
+- `DELETE /api/blogs/:id`: Delete a blog post.
+
+### Projects
+- `GET /api/projects`: Fetch all projects.
+- `POST /api/projects`: Add a new project.
+- `PUT /api/projects/:id`: Update a project.
+- `DELETE /api/projects/:id`: Delete a project.
+
+### Shops
+- `GET /api/shops`: Fetch all products.
+- `POST /api/shops`: Add a new product.
+- `PUT /api/shops/:id`: Update a product.
+- `DELETE /api/shops/:id`: Delete a product.
+
+### Contact
+- `POST /api/contact`: Send a message through the contact form.
+
+### Settings
+- `GET /api/settings`: Fetch site settings.
+- `PUT /api/settings`: Update site settings.
+
+## Deployment
+
+1. Build the project:
+   ```bash
+   npm run build
+   ```
+
+2. Start the production server:
+   ```bash
+   npm start
+   ```
+
+3. Deploy to platforms like Vercel, AWS, or Heroku.
+
+## Contact Information
+
+- **Email**: [njugunafelix79@gmail.com](mailto:njugunafelix79@gmail.com)
+- **Phone**: +254-0111255301
+- **LinkedIn**: [linkedin.com/in/felixnjuguna](https://linkedin.com/in/felixnjuguna)
+
+## Contributing
+
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Make your changes and commit them:
+   ```bash
+   git commit -m "Add feature-name"
+   ```
+4. Push to your forked repository:
+   ```bash
+   git push origin feature-name
+   ```
+5. Create a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+## Acknowledgments
+
+- Special thanks to the open-source community for inspiring this project.
