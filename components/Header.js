@@ -22,32 +22,32 @@ export default function Header({ handleAsideOpen }) {
 
     const { data: session } = useSession()
 
-    if (session) {
+    return <>
 
-
-        return <>
-            {/* <LoginLayout> */}
-            <header className="header flex flex-sb">
-                <div className="logo flex gap-2">
-                    <h1>ADMIN</h1>
-                    <div className="headerham flex flex-center" onClick={handleAsideOpen}>
-                        <FcMenu />
-                    </div>
+        <header className="header flex flex-sb">
+            <div className="logo flex gap-2">
+                <h1>ADMIN</h1>
+                {session ? <div
+                    className="headerham flex flex-center"
+                    onClick={handleAsideOpen}
+                >
+                    <FcMenu />
+                </div> : null}
+            </div>
+            <div className="rightnav flex gap-2">
+                <div onClick={toggleFullScreen}>
+                    {isFullscreen ? <FcLeftDown /> : <FcRightUp />}
                 </div>
-                <div className="rightnav flex gap-2">
-                    <div onClick={toggleFullScreen}>
-                        {isFullscreen ? <FcLeftDown /> : <FcRightUp />}
-                    </div>
-                    <div className="notification">
-                        <img src="/img/notification.png" alt="notification" />
-                    </div>
-                    <div className="profilenav">
-                        <img src="/img/user.png" alt="user" />
-                    </div>
+                <div className="notification">
+                    <img src="/img/notification.png" alt="notification" />
                 </div>
-            </header>
-            {/* </LoginLayout> */}
+                <div className="profilenav">
+                    <img src="/img/user.png" alt="user" />
+                </div>
+            </div>
+        </header>
 
-        </>
-    }
+
+    </>
+
 }
