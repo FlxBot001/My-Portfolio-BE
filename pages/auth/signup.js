@@ -1,9 +1,12 @@
 // pages/auth/signup.js
 
+// import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function SignUp() {
+
+  // const {data: session, status} = useSession();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -14,7 +17,11 @@ export default function SignUp() {
   const router = useRouter();
 
   // Authenticate
-  useEffect(() => {}, []);
+  // useEffect(() => {
+  //   if (status == 'authenticated') {
+  //     router.push('/');
+  //   }
+  // }, [status, router]);
 
   // Handle change
   const handleChange = (e) => {
@@ -26,7 +33,7 @@ export default function SignUp() {
     e.preventDefault();
 
     if (form.password !== form.confirmPassword) {
-      setError("Password do not match");
+      setError("Passwords do not match");
       return;
     }
 
@@ -35,15 +42,15 @@ export default function SignUp() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(form),
+      body: JSON.stringify({ email: form.email, password: form.password }),
     });
 
     const data = await res.json();
 
     if (data.error) {
-      setError('Error happened')
+      setError(data.error);
       setTimeout(() => {
-        setError('')
+        setError('');
       }, 3000); // remove error in 3 sec
     } else {
       router.push('/auth/signin');
@@ -67,6 +74,7 @@ export default function SignUp() {
 
             <input
               type="password"
+              onChange={handleChange}
               name="password"
               className="input"
               placeholder="Enter Your Password"
@@ -74,6 +82,7 @@ export default function SignUp() {
 
             <input
               type="password"
+              onChange={handleChange}
               name="confirmPassword"
               className="input"
               placeholder="Confirm Password"

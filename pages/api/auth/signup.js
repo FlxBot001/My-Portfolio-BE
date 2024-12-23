@@ -1,7 +1,6 @@
 import { mongooseConnect } from "@/lib/mongoose";
 import { Profile } from "@/models/Profile";
 
-
 export default async function handler(req, res) {
     await mongooseConnect();
 
@@ -9,11 +8,11 @@ export default async function handler(req, res) {
 
     try {
         // check if user exists
-        const existingUser = await Profile.findOne({email});
+        const existingUser = await Profile.findOne({ email });
 
         // if user exists, return error
         if (existingUser) {
-            return res.status(400).json({error: 'User already exists'});
+            return res.status(400).json({ error: 'User already exists' });
         }
 
         // create new user
@@ -23,10 +22,11 @@ export default async function handler(req, res) {
         });
 
         // return success
-        return res.status(200).json({message: 'User created successfully', user: newUser});
+        return res.status(200).json({ message: 'User created successfully', user: newUser });
 
     } catch (error) {
+        console.error('Error creating user:', error);
         // return error
-        return res.status(500).json({error: 'Internal server error'})
+        return res.status(500).json({ error: 'Internal server error' });
     }
 }
