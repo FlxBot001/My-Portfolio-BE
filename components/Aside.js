@@ -11,6 +11,7 @@ import {
   FcAddressBook,
 } from "react-icons/fc";
 import LoginLayout from "./LoginLayout";
+import { useSession, signOut } from "next-auth/react";
 
 export default function Aside({ asideOpen, handleAsideOpen }) {
   const router = useRouter();
@@ -31,9 +32,13 @@ export default function Aside({ asideOpen, handleAsideOpen }) {
     setActiveLink(router.pathname);
   }, [router.pathname]);
 
-  return (
-    <>
-      {/* <LoginLayout> */}
+  const { data: session } = useSession()
+
+  if (session) {
+
+    return (
+      <>
+        {/* <LoginLayout> */}
         <aside className={asideOpen ? "asideleft active" : "asideleft"}>
           <ul>
             <Link href="/">
@@ -167,9 +172,13 @@ export default function Aside({ asideOpen, handleAsideOpen }) {
               </li>
             </Link>
           </ul>
-          <button className="logoutbtn">Logout</button>
+          <button
+            className="logoutbtn"
+            onClick={() => signOut()}
+          >Logout</button>
         </aside>
-      {/* </LoginLayout> */}
-    </>
-  );
+        {/* </LoginLayout> */}
+      </>
+    );
+  }
 }
