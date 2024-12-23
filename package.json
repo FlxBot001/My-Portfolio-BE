@@ -14,6 +14,7 @@
     "@types/faker": "5.5.9",
     "aos": "^2.3.4",
     "axios": "^1.7.2",
+    "bcryptjs": "^2.4.3",
     "chart.js": "^4.4.2",
     "cloudinary": "^2.5.1",
     "cloudinary-react": "^1.8.1",
@@ -36,5 +37,8 @@
     "react-syntax-highlighter": "^15.6.1",
     "sortablejs": "^1.15.2",
     "yarn": "^1.22.22"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }

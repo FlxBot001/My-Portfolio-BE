@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { FcLeftDown, FcMenu, FcRightUp } from "react-icons/fc";
+import LoginLayout from "./LoginLayout";
+import { useSession } from "next-auth/react";
 
 
 export default function Header({ handleAsideOpen }) {
@@ -18,13 +20,19 @@ export default function Header({ handleAsideOpen }) {
         }
     }
 
+    const { data: session } = useSession()
+
     return <>
+
         <header className="header flex flex-sb">
             <div className="logo flex gap-2">
                 <h1>ADMIN</h1>
-                <div className="headerham flex flex-center" onClick={handleAsideOpen}>
+                {session ? <div
+                    className="headerham flex flex-center"
+                    onClick={handleAsideOpen}
+                >
                     <FcMenu />
-                </div>
+                </div> : null}
             </div>
             <div className="rightnav flex gap-2">
                 <div onClick={toggleFullScreen}>
@@ -39,5 +47,7 @@ export default function Header({ handleAsideOpen }) {
             </div>
         </header>
 
+
     </>
+
 }
