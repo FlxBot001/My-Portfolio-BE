@@ -10,6 +10,11 @@ export default async function handler(req, res) {
 
     const { username, email, password } = req.body;
 
+    // Validate input
+    if (!email || !username || !password) {
+        return res.status(400).json({ message: 'All fields are required' });
+    }
+
     try {
         // Check if the user already exists
         const existingUser = await Profile.findOne({ email });
@@ -18,13 +23,14 @@ export default async function handler(req, res) {
             return res.status(400).json({ message: 'User already exists' });
         }
 
-        // Create a new user
+        // Create a new user with raw password
         const newUser = new Profile({ username, email, password });
         await newUser.save();
 
-        res.status(201).json({ message: 'User created successfully', user: newUser });
+        res.status(201).json({ message: 'User created successfully', user: newUser, redirect: '/auth/signin' });
         
     } catch (error) {
+        console.error('Error creating user:', error); // Log the error
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }

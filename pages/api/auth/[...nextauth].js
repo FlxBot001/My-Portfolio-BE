@@ -1,7 +1,6 @@
 import NextAuth from 'next-auth';
 import connectToDatabase from '@/lib/mongodb'; // Ensure this path is correct
 import CredentialProvider from 'next-auth/providers/credentials';
-import bcrypt from 'bcryptjs';
 
 export default NextAuth({
     providers: [
@@ -15,7 +14,6 @@ export default NextAuth({
                 password: { label: "Password", type: "password" }
             },
 
-            
             async authorize(credentials, req) {
                 // connecting to database
                 const db = await connectToDatabase();
@@ -23,7 +21,7 @@ export default NextAuth({
 
                 const user = await collection.findOne({ email: credentials.email });
 
-                if (user && bcrypt.compareSync(credentials.password, user.password)) {
+                if (user && credentials.password === user.password) {
                     return { id: user._id, email: user.email };
                 }
 
@@ -49,5 +47,5 @@ export default NextAuth({
     pages: {
         signIn: '/auth/signin',
     },
-    //secret: process.env.NEXTAUTH_SECRET, // Add secret
+    secret: process.env.NEXTAUTH_SECRET, // Add secret
 })

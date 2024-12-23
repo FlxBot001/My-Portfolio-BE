@@ -4,13 +4,12 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export default function signin() {
+export default function Signin() {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     username: "",
     email: "",
     password: "",
-    confirmPassword: "",
   });
   const [error, setError] = useState("");
   const router = useRouter();
@@ -56,10 +55,42 @@ export default function signin() {
     }
   };
 
-
   return (
     <>
-      
+      <div className="flex flex-center full-h">
+        <div className="loginform">
+          <div className="heading">Sign In</div>
+          <form className="form" onSubmit={handleSubmit}>
+            <input
+              className='input'
+              placeholder="Enter email"
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+            <input
+              className='input'
+              placeholder="Enter password"
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+            <button
+              className="login-button"
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? 'Signing in...' : 'Sign In'}
+            </button>
+            {error && <p>{error}</p>}
+          </form>
+        </div>
+      </div>
+
     </>
   );
 }

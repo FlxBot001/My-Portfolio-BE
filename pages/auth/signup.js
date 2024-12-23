@@ -1,52 +1,46 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
 
 const Signup = () => {
   const [form, setForm] = useState({ username: '', email: '', password: '', confirmPassword: '' });
   const [error, setError] = useState('');
-
-  const [loading, setLoading] = useState(false); // Add loading state
-  const [message, setMessage] = useState(''); // Add message state
-  const [stage, setStage] = useState(1); // Add stage state
-  const { status } = useSession();
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [stage, setStage] = useState(1);
   const router = useRouter();
-
-  // authenticate
-  useEffect(() => {
-    if (status === 'authenticated') {
-      router.push('/');
-    }
-  }, [status, router]);
-
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-
   const handleNext = () => {
     if (stage === 1) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailRegex = /^[^\s@]+@(gmail\.com|outlook\.com|hotmail\.com|yahoo\.[a-z]{2,})$/;
       if (!emailRegex.test(form.email)) {
-        setError('Invalid email format');
+        setError('Invalid email format. Only @gmail, @outlook, @hotmail, @yahoo domains are allowed.');
         setTimeout(() => {
           setError('');
-        }, 3000); // remove error after 3 seconds
+        }, 3000);
         return;
       }
       setStage(2);
     }
   };
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true when form is submitted
+    setLoading(true);
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
+    if (!passwordRegex.test(form.password)) {
+      setError('Password must be at least 8 characters long and include uppercase, lowercase, numeric, and special characters.');
+      setLoading(false);
+      return;
+    }
 
     if (form.password !== form.confirmPassword) {
       setError('Passwords do not match');
-      setLoading(false); // Reset loading state
+      setLoading(false);
       return;
     }
 
@@ -65,27 +59,27 @@ const Signup = () => {
         setError('User already exists');
         setTimeout(() => {
           setError('');
-        }, 3000); // remove error after 3 seconds
-        router.push('/auth/signin'); // Redirect to login page
+        }, 3000);
+        router.push('/auth/signin');
       } else if (data.error) {
         setError('Error creating account');
         setTimeout(() => {
           setError('');
-        }, 3000); // remove error after 3 seconds
+        }, 3000);
       } else {
         setMessage(`Account created successfully, ${form.username}`);
         setTimeout(() => {
           setMessage('');
-          router.push('/auth/signin'); // Redirect to login page
-        }, 3000); // remove message after 3 seconds
+          router.push('/auth/signin');
+        }, 3000);
       }
     } catch (err) {
       setError('An unexpected error occurred');
       setTimeout(() => {
         setError('');
-      }, 3000); // remove error after 3 seconds
+      }, 3000);
     } finally {
-      setLoading(false); // Reset loading state
+      setLoading(false);
     }
   };
 
@@ -142,17 +136,15 @@ const Signup = () => {
               <button
                 className="login-button"
                 type="submit"
+                disabled={loading}
               >
-                Sign Up
+                {loading ? 'Signing Up...' : 'Sign Up'}
               </button>
             </>
           )}
           {error && <p>{error}</p>}
           {message && <p>{message}</p>}
         </form>
-        {/* <p>
-          <a href="/auth/signin">Login</a>, or <a href="/auth/forgotp">forgot password</a>.
-        </p> */}
       </div>
     </div>
   );
