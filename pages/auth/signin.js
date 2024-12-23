@@ -1,16 +1,24 @@
 'use client';
 
-import { signIn } from "next-auth/react";
+import Spinner from "@/components/Spinner";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function signin() {
 
+  const {data: session, status} = useSession();
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.push('/');
+    }
+  }, [status, router]);
 
   // Handle change
   const handleChange = (e) => {
@@ -42,20 +50,31 @@ export default function signin() {
       }
     } catch (error) {
       // Any other error
+      console.error('Sign-in error:', err);
       setError('Sign-In failed, try again');
       setTimeout(() => {
         setError('');
       }, 4000);
     } finally {
-      setLoading(false);
+      setLoading(false); // Ensures loading is set to false in all cases
+      setTimeout(() => {
+        setError('');
+      }, 4000);
     }
   };
+
+  if (status === 'loading') {
+    return <div className="flex flex-center wh_100">
+      <Spinner />
+    </div>;
+  }
 
   return (
     <>
       <div className="flex flex-center full-h">
         <div className="loginform">
           <div className="heading">Sign In Admin</div>
+          {loading ? <div className="flex flex-center w-100 flex-col"><Spinner /> Checking ...</div> : <>
 
           <form className="form" onSubmit={handleSubmit}>
             <input
@@ -86,7 +105,8 @@ export default function signin() {
             {error && <p className="redcolor">{error}</p>}
           </form>
           <span className="agreement"><a href="https://www.instagram.com/flxnjush/">Learn Admin licence agreement</a></span>
-          <p>Don't have an account? <a href="/auth/signup">Sign Up</a></p>
+          <p className="agreement">Don't have an account? <a href="/auth/signup">Sign Up</a></p>
+          </>}
         </div>
       </div>
     </>
