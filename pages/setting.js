@@ -36,6 +36,7 @@ export default function Setting() {
                             </div>
                             <div className="flex flex-center w-100 mt-2">
                                 <button>Save</button>
+                                <button>r_p</button>
                             </div>
                         </div>
                     </div>
