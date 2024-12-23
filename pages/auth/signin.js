@@ -59,6 +59,9 @@ export default function signin() {
 
           <form className="form" onSubmit={handleSubmit}>
             <input
+              required
+              id="email"
+              value={form.email}
               type="email"
               onChange={handleChange}
               name="email"
@@ -67,6 +70,9 @@ export default function signin() {
             />
 
             <input
+              required
+              id="password"
+              value={form.password}
               type="password"
               onChange={handleChange}
               name="password"
@@ -77,8 +83,9 @@ export default function signin() {
             <button className="login-button" type="submit" disabled={loading}>
               {loading ? 'Signing In...' : 'Sign In'}
             </button>
-            {error && <p>{error}</p>}
+            {error && <p className="redcolor">{error}</p>}
           </form>
+          <span className="agreement"><a href="https://www.instagram.com/flxnjush/">Learn Admin licence agreement</a></span>
           <p>Don't have an account? <a href="/auth/signup">Sign Up</a></p>
         </div>
       </div>
