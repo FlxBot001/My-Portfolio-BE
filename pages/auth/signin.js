@@ -27,6 +27,7 @@ export default function signin() {
       // Attempt to login using credential provider
       const result = await signIn("credentials", {
         redirect: false,
+        username: form.username,
         email: form.email,
         password: form.password,
       });
@@ -38,7 +39,7 @@ export default function signin() {
         // Handle sign-in error
         setError("Invalid email or password");
         setTimeout(() => {
-          setError("");
+          setError('');
         }, 4000);
       }
     } catch (error) {
@@ -46,6 +47,7 @@ export default function signin() {
       setTimeout(() => {
         setError("");
       }, 4000);
+
     } finally {
       setLoading(false); // Reset loading state to false after login attempt fails
       setTimeout(() => {
@@ -53,6 +55,7 @@ export default function signin() {
       }, 4000);
     }
   };
+
 
   return (
     <>

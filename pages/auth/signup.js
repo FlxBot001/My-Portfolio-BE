@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 const Signup = () => {
   const [form, setForm] = useState({ username: '', email: '', password: '', confirmPassword: '' });
   const [error, setError] = useState('');
+
   const [loading, setLoading] = useState(false); // Add loading state
   const [message, setMessage] = useState(''); // Add message state
   const [stage, setStage] = useState(1); // Add stage state
@@ -18,9 +19,11 @@ const Signup = () => {
     }
   }, [status, router]);
 
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
 
   const handleNext = () => {
     if (stage === 1) {
@@ -36,6 +39,7 @@ const Signup = () => {
     }
   };
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); // Set loading to true when form is submitted
@@ -135,7 +139,10 @@ const Signup = () => {
                 onChange={handleChange}
                 required
               />
-              <button className="login-button" type="submit">
+              <button
+                className="login-button"
+                type="submit"
+              >
                 Sign Up
               </button>
             </>
@@ -143,9 +150,9 @@ const Signup = () => {
           {error && <p>{error}</p>}
           {message && <p>{message}</p>}
         </form>
-        <p>
-          <a href="/auth/login">Login</a>, or <a href="/auth/resetpass">forgot password</a>.
-        </p>
+        {/* <p>
+          <a href="/auth/signin">Login</a>, or <a href="/auth/forgotp">forgot password</a>.
+        </p> */}
       </div>
     </div>
   );

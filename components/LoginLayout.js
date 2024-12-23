@@ -19,7 +19,7 @@ export default function LoginLayout({ children }) {
     }
 
     if (!session) {
-        router.push('/auth/signin');
+        router.push('/auth/signup'); // Redirect to signin page if not logged in
         return null;
     }
 
