@@ -7,7 +7,7 @@ export default function LoginLayout({ children }) {
     const router = useRouter();
 
     useEffect(() => {
-        if (status === 'authenticated' && router.pathname !== '/') {
+        if (status === 'authenticated' && (router.pathname === '/auth/signup' || router.pathname === '/auth/signin')) {
             router.push('/'); // Redirect to home page after successful login
         } else if (status === 'unauthenticated' && router.pathname !== '/auth/signup' && router.pathname !== '/auth/signin') {
             router.push('/auth/signup'); // Redirect to signup page if user is not authenticated
@@ -20,5 +20,5 @@ export default function LoginLayout({ children }) {
         </div>
     }
 
-    return session ? <>{children}</> : null;
+    return <>{children}</>;
 }
