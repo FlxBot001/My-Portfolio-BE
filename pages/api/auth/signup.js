@@ -29,6 +29,6 @@ export default async function handler(req, res) {
         res.status(201).json({ message: 'User created successfully', user: newUser });
         
     } catch (error) {
-        res.status(500).json({ error: 'Error creating account' });
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 }
