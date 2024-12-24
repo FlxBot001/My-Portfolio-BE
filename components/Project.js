@@ -192,10 +192,12 @@ export default function Project(
                     >
                         {/*<option value=""> Select Category</option>*/}
                         <option value="Website Development"> Website Development</option>
-                        <option value="Cloud Native Application Development">Cloud Service</option>
+                        <option value="Cloud Service">Cloud Service</option>
                         <option value="DevOps Pipeline">DevOps Pipeline</option>
-                        <option value="Django">Onpremises to Cloud Migrations</option>
-                        <option value="AI">Penetration Testing</option>
+                        <option value="Cloud Native">Cloud Native(MicroServices)</option>
+                        <option value="CyberSecurity">CyberSecurity</option>
+                        <option value="Amazon Web Services">Amazon Web Services</option>
+                        <option value="Microsoft Azure">Microsoft Azure</option>
                     </select>
                 </div>
 
