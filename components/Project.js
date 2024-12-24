@@ -193,7 +193,7 @@ export default function Project(
                         {/*<option value=""> Select Category</option>*/}
                         <option value="Website Development"> Website Development</option>
                         <option value="Cloud Service">Cloud Service</option>
-                        <option value="DevOps Pipeline">DevOps Pipeline</option>
+                        <option value="DevOps">DevOps</option>
                         <option value="Cloud Native">Cloud Native(MicroServices)</option>
                         <option value="CyberSecurity">CyberSecurity</option>
                         <option value="Amazon Web Services">Amazon Web Services</option>
